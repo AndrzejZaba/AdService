@@ -1,5 +1,7 @@
 using AdService.Application;
 using AdService.Infrastructure;
+using AdService.UI.Extensions;
+using Microsoft.AspNetCore.Mvc.Razor;
 using NLog.Web;
 
 namespace AdService.UI
@@ -16,6 +18,8 @@ namespace AdService.UI
 
             builder.Services.AddApplication();
             builder.Services.AddInfrastructure();
+
+            builder.Services.DefineViewLocation(builder.Configuration);
 
             // Add services to the container.
             builder.Services.AddControllersWithViews();
