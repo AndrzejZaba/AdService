@@ -1,6 +1,7 @@
 using AdService.Application;
 using AdService.Infrastructure;
 using AdService.UI.Extensions;
+using AdService.UI.Middlewares;
 using Microsoft.AspNetCore.Mvc.Razor;
 using NLog.Web;
 
@@ -34,6 +35,19 @@ namespace AdService.UI
                 app.UseExceptionHandler("/Home/Error");
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
+            }
+
+            app.UseMiddleware<ExceptionHandlerMiddleware>();
+
+            var logger = app.Services.GetService<ILogger<Program>>();
+
+            if (app.Environment.IsDevelopment())
+            {
+                logger.LogInformation("DEVELOPMENT MODE");
+            }
+            else
+            {
+                logger.LogInformation("PRODUCTION MODE");
             }
 
             app.UseHttpsRedirection();

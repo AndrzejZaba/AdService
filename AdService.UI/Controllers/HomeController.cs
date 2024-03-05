@@ -14,9 +14,7 @@ namespace AdService.UI.Controllers
         }
         public IActionResult Index()
         {
-            _logger.LogInformation("Przykładowy log");
-
-            _logger.LogError(new Exception("Log Error"), null);
+            throw new Exception("Nieobsłużony błąd!");
 
             return View();
         }
