@@ -1,5 +1,6 @@
 using AdService.Application;
 using AdService.Infrastructure;
+using NLog.Web;
 
 namespace AdService.UI
 {
@@ -9,13 +10,15 @@ namespace AdService.UI
         {
             var builder = WebApplication.CreateBuilder(args);
 
+            builder.Logging.ClearProviders();
+            builder.Logging.SetMinimumLevel(LogLevel.Information);
+            builder.Logging.AddNLogWeb();
+
             builder.Services.AddApplication();
             builder.Services.AddInfrastructure();
 
             // Add services to the container.
             builder.Services.AddControllersWithViews();
-
-
 
             var app = builder.Build();
 
