@@ -8,7 +8,7 @@ static class ModelBuilderExtensionsSettingsPosition
 {
     public static void SeedSettingsPositions(this ModelBuilder modelBuilder)
     {
-        modelBuilder.Entity<Settings>().HasData(
+        modelBuilder.Entity<SettingsPosition>().HasData(
             new SettingsPosition
             {
                 Id = 1,
