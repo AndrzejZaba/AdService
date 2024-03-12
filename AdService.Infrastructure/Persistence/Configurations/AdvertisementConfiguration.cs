@@ -13,6 +13,12 @@ public class AdvertisementConfiguration : IEntityTypeConfiguration<Advertisement
 
         builder.Property(x => x.Id)
             .IsRequired();
+
+        builder.Property(x => x.UserId) 
+            .IsRequired();
+        
+        builder.Property(x => x.CategoryId) 
+            .IsRequired();
         
         builder.Property(x => x.Title)
             .HasMaxLength(300)
