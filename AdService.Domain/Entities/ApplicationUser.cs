@@ -7,6 +7,7 @@ public class ApplicationUser
     public string LastName { get; set; }
     public DateTime RegisterDateTime { get; set; }
     public bool IsDeleted { get; set; }
+    public string WebsiteUrl { get; set; }
 
 
     public Address Address { get; set; }

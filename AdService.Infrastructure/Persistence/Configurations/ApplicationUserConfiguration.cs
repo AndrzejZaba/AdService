@@ -15,6 +15,9 @@ public class ApplicationUserConfiguration : IEntityTypeConfiguration<Application
         builder.Property(x => x.LastName)
             .HasMaxLength(100);
 
+        builder.Property(x => x.WebsiteUrl)
+           .IsUnicode(false);
+
         builder
             .HasOne(x => x.Address)
             .WithOne(x => x.User)
@@ -26,7 +29,6 @@ public class ApplicationUserConfiguration : IEntityTypeConfiguration<Application
             .WithOne(x => x.User)
             .HasForeignKey<Client>(x => x.UserId)
             .OnDelete(DeleteBehavior.Restrict);
-
 
     }
 
