@@ -11,7 +11,7 @@ public class Advertisement
     public DateTime CreationDate { get; set; }
     public string WebsiteUrl { get; set; }
 
-    public ICollection<string> Images { get; set; }
+    public ICollection<AdImage> Images { get; set; } = new List<AdImage>();
 
     public int CategoryId { get; set; }
     public Category Category { get; set; }
