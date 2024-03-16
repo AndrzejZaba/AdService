@@ -1,4 +1,5 @@
-﻿using MediatR;
+﻿using AdService.Application.Common.Behaviours;
+using MediatR;
 using Microsoft.Extensions.DependencyInjection;
 using System.Reflection;
 
@@ -10,6 +11,8 @@ public static class DependencyInjection
     {
 
         services.AddMediatR(Assembly.GetExecutingAssembly());
+
+        services.AddTransient(typeof(IPipelineBehavior<,>), typeof(LoggingBehaviour<,>));
 
         return services;
     }

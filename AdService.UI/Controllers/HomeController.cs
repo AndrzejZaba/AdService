@@ -14,7 +14,7 @@ namespace AdService.UI.Controllers
         }
         public IActionResult Index()
         {
-            throw new Exception("Nieobsłużony błąd!");
+            //await Mediator.Send(new )
 
             return View();
         }
