@@ -1,12 +1,13 @@
 ﻿using AdService.Application.Common.Interfaces;
 using AdService.Domain.Entities;
 using AdService.Infrastructure.Persistence.Extensions;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using System.Reflection;
 
 namespace AdService.Infrastructure.Persistence;
 
-public class ApplicationDbContext : DbContext, IApplicationDbContext
+public class ApplicationDbContext : IdentityDbContext<ApplicationUser>, IApplicationDbContext
 {
 
     public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)

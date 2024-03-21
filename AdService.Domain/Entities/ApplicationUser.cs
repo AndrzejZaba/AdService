@@ -1,8 +1,9 @@
-﻿namespace AdService.Domain.Entities;
+﻿using Microsoft.AspNetCore.Identity;
 
-public class ApplicationUser
+namespace AdService.Domain.Entities;
+
+public class ApplicationUser : IdentityUser
 {
-    public string Id { get; set; }
     public string FirstName { get; set; }
     public string LastName { get; set; }
     public DateTime RegisterDateTime { get; set; }
