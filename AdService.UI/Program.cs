@@ -2,8 +2,8 @@ using AdService.Application;
 using AdService.Infrastructure;
 using AdService.UI.Extensions;
 using AdService.UI.Middlewares;
-using Microsoft.AspNetCore.Mvc.Razor;
 using NLog.Web;
+
 
 namespace AdService.UI
 {
@@ -54,12 +54,14 @@ namespace AdService.UI
             app.UseStaticFiles();
 
             app.UseRouting();
-
+            app.UseAuthentication();;
             app.UseAuthorization();
 
             app.MapControllerRoute(
                 name: "default",
                 pattern: "{controller=Home}/{action=Index}/{id?}");
+
+            app.MapRazorPages();
 
             app.Run();
         }
