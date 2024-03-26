@@ -66,5 +66,14 @@
         "main/pl/numbers.json"
       ]
     }
+  ,
+{
+  "provider": "cdnjs",
+  "library": "font-awesome@6.5.1",
+  "destination": "wwwroot/lib/font-awesome/",
+  "files": [
+    "css/all.min.css"
   ]
+}
+]
 }
