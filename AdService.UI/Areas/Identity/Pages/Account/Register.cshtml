@@ -15,12 +15,34 @@
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/AdService.UI.styles.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/custom_bootstrap_theme.css" />
 </head>
 
-<body>
+<body class="bg-light">
 
-    
-    <h1>@ViewData["Title"]</h1>
+    <div class="center-div-parent-container">
+        <div class="center-div-container">
+            <div class="card">
+
+                <h3 class="card-header bg-transparent mt-3 pb-3 text-center">Create Account</h3>
+
+                <div class="card-body">
+
+                    <form asp-route-returnUrl="@Model.ReturnUrl" method="post">
+
+                        <span asp-validation-for="Input.Email" class="text-danger"></span>
+
+
+                    </form>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
+
 
     <div class="row">
         <div class="col-md-4">

@@ -1,4 +1,5 @@
 using AdService.Application;
+using AdService.Application.Common.Interfaces;
 using AdService.Infrastructure;
 using AdService.UI.Extensions;
 using AdService.UI.Middlewares;
@@ -27,7 +28,15 @@ namespace AdService.UI
 
             var app = builder.Build();
 
-            app.UseInfrastructure();
+            using (var scope = app.Services.CreateScope())
+            {
+                app.UseInfrastructure(
+                    scope.ServiceProvider.GetRequiredService<IApplicationDbContext>(),
+                    app.Services.GetService<IAppSettingsService>(),
+                    app.Services.GetService<IEmail>());
+
+            }
+
 
             // Configure the HTTP request pipeline.
             if (!app.Environment.IsDevelopment())

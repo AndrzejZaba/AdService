@@ -1,9 +1,14 @@
 ﻿@page
 @model LoginModel
 
+@inject IConfiguration configuration
+ 
+
 @{
+    var templateKey = configuration.GetSection("TemplateKey").Value;
+    Layout = $"/Views/{templateKey}/Shared/_Layout.cshtml";
     ViewData["Title"] = "Log in";
-    Layout = null;
+    //Layout = null;
 }
 
 <h1>@ViewData["Title"]</h1>

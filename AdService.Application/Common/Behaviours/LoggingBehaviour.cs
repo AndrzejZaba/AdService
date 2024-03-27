@@ -3,7 +3,7 @@ using Microsoft.Extensions.Logging;
 
 namespace AdService.Application.Common.Behaviours;
 
-public class LoggingBehaviour<TRequest, TResponse> : IPipelineBehavior<TRequest, TResponse> where TRequest : MediatR.IRequest<TResponse>
+public class LoggingBehaviour<TRequest, TResponse> : IPipelineBehavior<TRequest, TResponse> where TRequest : IRequest<TResponse>
 {
     private readonly ILogger _logger;
 

@@ -2,6 +2,7 @@
 using AdService.Domain.Entities;
 using AdService.Infrastructure.Identity;
 using AdService.Infrastructure.Persistence;
+using AdService.Infrastructure.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -43,11 +44,17 @@ public static class DependencyInjection
         .AddDefaultUI()
         .AddDefaultTokenProviders();
 
+        services.AddSingleton<IAppSettingsService, AppSettingsService>();
+        services.AddSingleton<IEmail, Email>();
+        services.AddScoped<IDateTimeService, DateTimeService>();
+
         return services;
     }
 
-    public static IApplicationBuilder UseInfrastructure(this IApplicationBuilder app)
+    public static IApplicationBuilder UseInfrastructure(this IApplicationBuilder app, IApplicationDbContext context, IAppSettingsService appSettingsService, IEmail email)
     {
+        appSettingsService.Update(context).GetAwaiter().GetResult();
+        email.Update(appSettingsService).GetAwaiter().GetResult();
 
         return app;
     }

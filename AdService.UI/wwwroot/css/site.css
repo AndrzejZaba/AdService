@@ -16,3 +16,15 @@ html {
 body {
   margin-bottom: 60px;
 }
+
+.center-div-parent-container {
+    display: table;
+    height: 100%;
+    margin: 0 auto;
+}
+
+.center-div-container {
+    display: table-cell;
+    vertical-align: middle;
+    min-width: 390px;
+}
