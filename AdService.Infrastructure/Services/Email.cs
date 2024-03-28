@@ -42,6 +42,7 @@ public class Email : IEmail
 
         using (var client = new SmtpClient())
         {
+            client.CheckCertificateRevocation = false;
             await client.ConnectAsync(_hostSmtp, _port, MailKit.Security.SecureSocketOptions.Auto);
 
             await client.AuthenticateAsync(!string.IsNullOrWhiteSpace(_senderLogin) ? _senderLogin : _senderEmail, _senderEmailPassword);
