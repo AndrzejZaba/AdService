@@ -5,20 +5,52 @@
     Layout = null;
 }
 
-<h1>@ViewData["Title"]</h1>
-@{
-    if (@Model.DisplayConfirmAccountLink)
-    {
-<p>
-    This app does not currently have a real email sender registered, see <a href="https://aka.ms/aspaccountconf">these docs</a> for how to configure a real email sender.
-    Normally this would be emailed: <a id="confirm-link" href="@Model.EmailConfirmationUrl">Click here to confirm your account</a>
-</p>
-    }
-    else
-    {
-<p>
-        Please check your email to confirm your account.
-</p>
-    }
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>@ViewData["Title"] - AdService.UI</title>
+        <link rel="stylesheet" href="~/lib/font-awesome/css/all.min.css" />
+        <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+        <link rel="stylesheet" href="~/css/custom_bootstrap.css" />
+        <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+        <link rel="stylesheet" href="~/AdService.UI.styles.css" asp-append-version="true" />
+        <style>
+            html, body{
+                height:100%;
+            }
+        </style>
+    </head>
+
+    <body class="bg-light">
+
+
+            <div class="center-div-parent-container">
+                <div class="center-div-container">
+                    <div class="card card-border-top">
+                        <h3 class="card-header bg-transparent mt-3 pb-3 text-center">@ViewBag.Title</h3>
+                        <div class="card-body">
+                    
+                            <div class="alert alert-success" role="alert">
+                                <h4 class="alert-heading">Well done!</h4>
+                                <p>Thank you for registering! We have sent you an e-mail with an activation link. Check your mailbox and confirm the e-mail.</p>
+                                <hr>
+                                <p class="mb-0">Get ready to explore and enjoy all the benefits our platform has to offer.</p>
+                                <hr />
+                                <p>Normally this would be emailed: <a id="confirm-link" href="@Model.EmailConfirmationUrl">Click here to confirm your account</a></p>
+                            </div>
+                            
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+    </body>
+</html>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
 }
 
