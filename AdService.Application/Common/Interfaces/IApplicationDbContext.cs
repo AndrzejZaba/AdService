@@ -11,6 +11,7 @@ public interface IApplicationDbContext : IDisposable
     DbSet<Category> Categories { get; set; }
     DbSet<Settings> Settings { get; set; }
     DbSet<SettingsPosition> SettingsPositions { get; set; }
+    DbSet<ApplicationUser> Users { get; set; }
 
     Task<int> SaveChangesAsync(CancellationToken cancellationToken = default); 
 }
