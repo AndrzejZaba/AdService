@@ -9,5 +9,11 @@ namespace AdService.UI.Controllers
         {
             return View(await Mediator.Send(new GetClientQuery { UserId = UserId}));
         }
+
+        public IActionResult EditProfile()
+        {
+            return View();
+            //return View(await Mediator.Send(new GetEditClientQuery { UserId = UserId }));
+        }
     }
 }

@@ -22,6 +22,7 @@ public static class UserExtensions
             Email = user.Email,
             FirstName = user.FirstName,
             LastName = user.LastName,
+            PhoneNumber = user.PhoneNumber,
             NipNumber = user.Client?.NipNumber,
             IsPrivateAccount = user.Client?.IsPrivateAccount ?? true
         };

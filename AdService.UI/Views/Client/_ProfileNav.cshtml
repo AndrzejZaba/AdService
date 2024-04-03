@@ -1,9 +1,12 @@
-﻿@using AdService.UI.Extensions;
+﻿@using AdService.UI.Areas.Identity.Pages.Account.Manage;
+@using AdService.UI.Extensions;
 @*
     For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 *@
 @{
 }
+<div class="bg-white"  style="width: 100%; padding-top: 20px;">
+
 
 <div class="container">
         
@@ -18,12 +21,13 @@
                     <a asp-controller="Client" asp-action="Profile" class="nav-link @Url.MakeActiveClass("Client", "Profile")">My Profile</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Edit Profile</a>
+                    <a asp-controller="Client" asp-action="EditProfile" class="nav-link @Url.MakeActiveClass("Client", "EditProfile")">Edit Profile</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#">My Advertisements</a>
                 </li>
+                @*<li class="nav-item"><a class="nav-link @ManageNavPages.ChangePasswordNavClass(ViewContext)" asp-area="Identity" id="change-password" asp-page="/Account/Manage/ChangePassword">Change Password</a></li>*@
             </ul>
         </div>
-
-    </div>
+</div>
+</div>

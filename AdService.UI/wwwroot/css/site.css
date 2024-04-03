@@ -42,3 +42,40 @@ body {
     padding-top: 50px;
     padding-bottom: 50px;
 }
+
+.card-border-top {
+    border-top: 3px solid #814afa;
+}
+
+.card-primary {
+    padding-left: 0;
+    padding-right: 0;
+    margin-bottom: 1rem;
+    margin-top: 2rem;
+}
+
+.card-center{
+    margin: 0 auto;
+
+}
+
+@media screen and (min-width: 640px) {
+    .card-body {
+        padding: 2rem;
+    }
+}
+
+.card-body label, .modal-body label {
+    margin-bottom: 0.5rem;
+    font-weight: bold;
+}
+
+.card-body .form-group:not(:first-child), .modal-body .form-group {
+    margin-top: 1rem;
+}
+
+.card-body .form-check, .modal-body .form-check {
+    margin-top: 1.5rem;
+}
+
+
