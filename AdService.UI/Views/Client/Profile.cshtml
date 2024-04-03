@@ -10,24 +10,7 @@
 <div class="bg-white" style="width: 100%; padding-top: 20px; ">
     <div class="container">
         
-        <div class="mb-3" style="padding-left: 18px;">
-            <h2>@ViewData["Title"]</h2>
-        </div>
-
-
-        <div>
-            <ul class="nav">
-                <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="#">My Profile</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Edit Profile</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">My Advertisements</a>
-                </li>
-            </ul>
-        </div>
+        <partial name="_ProfileNav" />
 
         
         <p>uzytkownik: @Model.Email</p>
