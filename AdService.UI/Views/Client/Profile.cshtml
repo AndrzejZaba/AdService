@@ -42,44 +42,57 @@
                                 <div class="row gx-3 mb-3">
                                     <!-- Form Group (first name)-->
                                     <div class="col-md-6">
-                                        <label class="small mb-1" for="inputFirstName">First name</label>
-                                        <input class="form-control" id="inputFirstName" type="text" placeholder="Enter your first name" value="Valerie">
+                                        @Html.LabelFor(x => x.FirstName)
+                                        @Html.TextBoxFor(x => x.FirstName, new { @class = "form-control", @placeholder = "Enter your first name", @value = @Model.FirstName})
+                                        
                                     </div>
                                     <!-- Form Group (last name)-->
                                     <div class="col-md-6">
-                                        <label class="small mb-1" for="inputLastName">Last name</label>
-                                        <input class="form-control" id="inputLastName" type="text" placeholder="Enter your last name" value="Luna">
+                                        @Html.LabelFor(x => x.LastName)
+                                        @Html.TextBoxFor(x => x.LastName, new { @class = "form-control", @placeholder = "Enter your last name", @value = @Model.LastName})
                                     </div>
                                 </div>
-                                <!-- Form Row        -->
+
+                                <!-- Form Row-->
+                                <div class="mb-5">
+                                    <!-- Form Group (first name)-->  
+                                    @Html.LabelFor(x => x.PhoneNumber)
+                                    @Html.TextBoxFor(x => x.PhoneNumber, new { @class = "form-control", @placeholder = "Enter your phone number", @value = @Model.PhoneNumber})                                    
+                                </div>
+
+                                
+
+                                <!-- Form Group (email address)-->
+                                <div class="mb-3">
+                                        @Html.LabelFor(x => x.Country)
+                                        @Html.TextBoxFor(x => x.Country, new { @class = "form-control", @placeholder = "Enter your country", @value = @Model.Country})   
+                                </div>
+
+                                <!-- Form Row -->
                                 <div class="row gx-3 mb-3">
                                     <!-- Form Group (organization name)-->
                                     <div class="col-md-6">
-                                        <label class="small mb-1" for="inputOrgName">Organization name</label>
-                                        <input class="form-control" id="inputOrgName" type="text" placeholder="Enter your organization name" value="Start Bootstrap">
+                                        @Html.LabelFor(x => x.City)
+                                        @Html.TextBoxFor(x => x.City, new { @class = "form-control", @placeholder = "Enter your phone number", @value = @Model.City})   
                                     </div>
                                     <!-- Form Group (location)-->
                                     <div class="col-md-6">
-                                        <label class="small mb-1" for="inputLocation">Location</label>
-                                        <input class="form-control" id="inputLocation" type="text" placeholder="Enter your location" value="San Francisco, CA">
+                                        @Html.LabelFor(x => x.ZipCode)
+                                        @Html.TextBoxFor(x => x.ZipCode, new { @class = "form-control", @placeholder = "Enter your zip code", @value = @Model.ZipCode, id = "ZipCode"})  
                                     </div>
                                 </div>
-                                <!-- Form Group (email address)-->
-                                <div class="mb-3">
-                                    <label class="small mb-1" for="inputEmailAddress">Email address</label>
-                                    <input class="form-control" id="inputEmailAddress" type="email" placeholder="Enter your email address" value="name@example.com">
-                                </div>
+                                
                                 <!-- Form Row-->
                                 <div class="row gx-3 mb-3">
                                     <!-- Form Group (phone number)-->
                                     <div class="col-md-6">
-                                        <label class="small mb-1" for="inputPhone">Phone number</label>
-                                        <input class="form-control" id="inputPhone" type="tel" placeholder="Enter your phone number" value="555-123-4567">
+                                        @Html.LabelFor(x => x.Street)
+                                        @Html.TextBoxFor(x => x.Street, new { @class = "form-control", @placeholder = "Enter your street", @value = @Model.Street})  
                                     </div>
                                     <!-- Form Group (birthday)-->
                                     <div class="col-md-6">
-                                        <label class="small mb-1" for="inputBirthday">Birthday</label>
-                                        <input class="form-control" id="inputBirthday" type="text" name="birthday" placeholder="Enter your birthday" value="06/10/1988">
+                                        @Html.LabelFor(x => x.StreetNumber)
+                                        @Html.TextBoxFor(x => x.StreetNumber, new { @class = "form-control", @placeholder = "Enter your street number", @value = @Model.StreetNumber})  
                                     </div>
                                 </div>
                                 <!-- Save changes button-->
@@ -93,3 +106,27 @@
 
     </div>
 </div>
+
+
+@section Scripts
+{
+    <partial name="_ValidationScriptsPartial" />
+
+    <script src="~/lib/inputmask/jquery.inputmask.bundle.min.js"></script>
+
+    <script>
+
+        $(document).ready(function() {
+
+            //if ('@Model.IsPrivateAccount.ToString().ToUpper()' == 'FALSE'){
+            //    $("#divNipNumber").show();
+            //}
+
+            $("#ZipCode").inputmask("99-999", {"clearIncomplete": true, showMaskOnHover: false });
+
+        });
+
+    </script>
+
+
+}
