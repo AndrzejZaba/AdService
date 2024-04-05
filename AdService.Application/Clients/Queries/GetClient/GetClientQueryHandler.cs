@@ -1,11 +1,12 @@
-﻿using AdService.Application.Common.Interfaces;
+﻿using AdService.Application.Clients.Commands.EditUser;
+using AdService.Application.Common.Interfaces;
 using AdService.Application.Users.Extensions;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 
 namespace AdService.Application.Clients.Queries.GetClient;
 
-public class GetClientQueryHandler : IRequestHandler<GetClientQuery, ClientDto>
+public class GetClientQueryHandler : IRequestHandler<GetClientQuery, EditUserCommand>
 {
     private readonly IApplicationDbContext _context;
 
@@ -13,7 +14,7 @@ public class GetClientQueryHandler : IRequestHandler<GetClientQuery, ClientDto>
     {
         _context = context;
     }
-    public async Task<ClientDto> Handle(GetClientQuery request, CancellationToken cancellationToken)
+    public async Task<EditUserCommand> Handle(GetClientQuery request, CancellationToken cancellationToken)
     {
         var user = await _context
             .Users
@@ -22,7 +23,7 @@ public class GetClientQueryHandler : IRequestHandler<GetClientQuery, ClientDto>
             .AsNoTracking()
             .FirstOrDefaultAsync(x => x.Id == request.UserId);
 
-        return user.ToClientDto();
+        return user.ToEditUserCommand();
             
     }
 }

@@ -78,4 +78,8 @@ body {
     margin-top: 1.5rem;
 }
 
+.field-validation-error {
+    color: #ff3333;
+    padding-top: 0.5rem;
+}
 

@@ -16,8 +16,4 @@
     <ProjectReference Include="..\AdService.Domain\AdService.Domain.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Clients\Commands\" />
-  </ItemGroup>
-
 </Project>
