@@ -11,7 +11,7 @@ public static class IUrlHelperExtensions
     {
         try
         {
-            var result = "active";
+            var result = "active font-weight-bold";
             var controllerName = urlHelper.ActionContext.RouteData.Values
                 ["controller"].ToString();
             var methodName = urlHelper.ActionContext.RouteData.Values

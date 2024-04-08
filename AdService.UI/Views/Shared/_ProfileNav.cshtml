@@ -21,10 +21,10 @@
                     <a asp-controller="Client" asp-action="Profile" class="nav-link @Url.MakeActiveClass("Client", "Profile")">My Profile</a>
                 </li>
                 <li class="nav-item">
-                    <a asp-controller="Client" asp-action="EditProfile" class="nav-link @Url.MakeActiveClass("Client", "EditProfile")">Edit Profile</a>
+                    <a asp-controller="Advertisements" asp-action="MyJobAdvertisements" class="nav-link @Url.MakeActiveClass("Advertisements", "MyJobAdvertisements")">My Job Advertisements</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">My Advertisements</a>
+                    <a asp-controller="Advertisements" asp-action="MyCoursesAdvertisements" class="nav-link @Url.MakeActiveClass("Advertisements", "MyCoursesAdvertisements")">My Courses Advertisements</a>
                 </li>
                 @*<li class="nav-item"><a class="nav-link @ManageNavPages.ChangePasswordNavClass(ViewContext)" asp-area="Identity" id="change-password" asp-page="/Account/Manage/ChangePassword">Change Password</a></li>*@
             </ul>

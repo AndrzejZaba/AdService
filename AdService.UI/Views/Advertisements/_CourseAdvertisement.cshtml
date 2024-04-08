@@ -1,0 +1,23 @@
+﻿@using AdService.Application.Common.Extensions;
+
+@{
+    var myString = "This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.";
+}
+
+    <div class="card h-100" style="height: 550px;">
+      <img src="https://mdbcdn.b-cdn.net/img/new/standard/city/044.webp" class="card-img-top" alt="Skyscrapers"/>
+      <div class="card-body">
+        <h5 class="card-title">Advanced C# Course</h5>
+        <p>
+            Price: <strong>300.00$</strong>
+        </p>
+        <p class="card-text">
+          @myString.TakeFirstNChar(100)
+        </p>
+        
+      </div>
+      <div class="card-footer">
+        <small class="text-muted">Last updated 3 mins ago</small>
+      </div>
+    </div>
+  
