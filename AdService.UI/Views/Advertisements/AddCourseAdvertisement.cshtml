@@ -6,6 +6,9 @@
     ViewData["Title"] = "My Profile";
 }
 
+@section Styles{
+    <partial name="Styles/_DateTimeStyles" />
+}
 
 <div>
 
@@ -17,7 +20,7 @@
                 <div class="card mb-4 card-primary card-border-top">
                     <div class="card-header">Account Details</div>
                         <div class="card-body">
-                            @using (Html.BeginForm("Profile", "Client"))
+                            @using (Html.BeginForm("AddCourseAdvertisement", "Advertisements"))
                             {
 
                                 @Html.AntiForgeryToken()
@@ -41,28 +44,57 @@
 
                                 <!-- Form Row  - Start and End dates -->
                                 <div class="row gx-3 mb-3">
-                                    <!-- Form Group (first name)-->
+                                    <!-- Start date -->
                                     <div class="col-md-6">
                                         @Html.LabelFor(x => x.StartDate)
-                                        @Html.TextBoxFor(x => x.StartDate, new { @class = "form-control", @placeholder = "Enter your first name", @value = @Model.StartDate})
+                                        <div class="input-group date" id="dtpStartDate" data-target-input="nearest">
+                                            <input asp-for="StartDate" type="text" class="form-control datetimepicker-input" data-target="#dtpStartDate" value="@Model.StartDate.ToString("dd-MM-yyyy")" />
+                                            <div class="input-group-append" data-target="#dtpStartDate" data-toggle="datetimepicker">
+                                                <div class="input-group-text calendar">
+                                                    <i class="fa fa-calendar-days"></i>
+                                                </div>
+                                            </div>
+                                        </div>
+
                                         @Html.ValidationMessageFor(x => x.StartDate)
                                     </div>
-                                    <!-- Form Group (last name)-->
+                                    <!-- End date -->
                                     <div class="col-md-6">
                                         @Html.LabelFor(x => x.EndDate)
-                                        @Html.TextBoxFor(x => x.EndDate, new { @class = "form-control", @placeholder = "Enter your last name", @value = @Model.EndDate})
+                                        <div class="input-group date" id="dtpEndDate" data-target-input="nearest">
+                                            <input asp-for="EndDate" type="text" class="form-control datetimepicker-input" data-target="#dtpEndDate" />
+                                            <div class="input-group-append" data-target="#dtpEndDate" data-toggle="datetimepicker">
+                                                <div class="input-group-text calendar">
+                                                    <i class="fa fa-calendar-days"></i>
+                                                </div>
+                                            </div>
+                                        </div>
+
                                         @Html.ValidationMessageFor(x => x.EndDate)
                                     </div>
+
                                 </div>
 
                                 
-                                <!-- Form Group - Price -->
+                                <!-- Form Group - CoursePrice -->
                                 <div class="mb-3">
                                         @Html.LabelFor(x => x.Price)
                                         @Html.TextBoxFor(x => x.Price, new { @class = "form-control", @placeholder = "Enter price for your course", @value = @Model.Price})   
                                         @Html.ValidationMessageFor(x => x.Price)
                                 </div>
                                 
+                                <!-- Form Group - Price -->
+                                <div class="mb-3">
+                                    @Html.LabelFor(x => x.Price)
+                                    @Html.TextBoxFor(x => x.Price, new { @id = "CalculatedPrice", @class = "form-control", @readonly = "readonly"})
+                                    @Html.ValidationMessageFor(x => x.Price)
+                                </div>
+
+                                
+                                @*<div>
+                                    <label for="price">Price: $</label>
+                                    <span id="price">0</span>
+                                </div>*@
 
                                 <!-- Save changes button-->
                                 <button class="btn btn-primary" type="submit">Pay for advertisement</button>
@@ -80,19 +112,49 @@
 @section Scripts
 {
     <partial name="_ValidationScriptsPartial" />
+    <partial name="Scripts/_DateTimeScripts" />
 
-    <script src="~/lib/inputmask/jquery.inputmask.bundle.min.js"></script>
 
     <script>
 
         $(document).ready(function() {
 
+            $('#dtpStartDate').datetimepicker({
+                format: 'L'
+            })
+            
+            $('#dtpEndDate').datetimepicker({
+                format: 'L'
+            })
 
+            var pricePerDay = 100; // Price per day
 
+                // Function to calculate days and update price
+            function updatePrice() {
+                var startDate = $('#dtpStartDate').datetimepicker('date');
+                var endDate = $('#dtpEndDate').datetimepicker('date');
+                var price = 0;
 
+                if (startDate && endDate && startDate <= endDate) {
+                    var diff = endDate.diff(startDate, 'days');
+                    price = diff * pricePerDay;
+                }
+
+                // Update the readonly text input for displaying calculated price
+                $('#CalculatedPrice').val(price);
+            }
+
+            // Event listener for date changes
+            $('#dtpStartDate, #dtpEndDate').on('change.datetimepicker', function (e) {
+                updatePrice();
+            });
+
+            updatePrice();
         });
 
     </script>
 
-
 }
+
+
+

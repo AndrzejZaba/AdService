@@ -83,7 +83,12 @@ body {
     padding-top: 0.5rem;
 }
 
-/*//*/
+
+.input-group-text.calendar {
+    font-size: 1.5rem;
+}
+
+/*styles for job advert - start*/
 .job-box {
     background: #fff;
     -webkit-box-shadow: 0 0 35px 0 rgba(130, 130, 130, 0.2);
@@ -195,3 +200,5 @@ ul {
 .mb-30 {
     margin-bottom: 30px;
 }
+
+/* styles for job advert - end*/
