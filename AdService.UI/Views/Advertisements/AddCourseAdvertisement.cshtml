@@ -1,5 +1,98 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
+﻿@using AdService.Application.Advertisements.CourseAdvertisements.Commands;
+
+@model AddCourseAdvertisementCommand
+
 @{
+    ViewData["Title"] = "My Profile";
+}
+
+
+<div>
+
+    <partial name="_ProfileNav" />
+
+    <div class="container">
+        
+                <!-- Account details card-->
+                <div class="card mb-4 card-primary card-border-top">
+                    <div class="card-header">Account Details</div>
+                        <div class="card-body">
+                            @using (Html.BeginForm("Profile", "Client"))
+                            {
+
+                                @Html.AntiForgeryToken()
+                                
+
+                                <!-- Form Group (username)-->
+                                <div class="mb-3">
+                                    @*<label class="small mb-1" for="inputUsername">Email</label>*@
+                                    @Html.LabelFor(x => x.Title)
+                                    @Html.TextBoxFor(x => x.Title, new { @class = "form-control", @placeholder = "Enter your course's Title"})
+                                </div>
+
+
+                                <!-- Form Row-->
+                                <div class="mb-3">
+                                    <!-- Form Group (first name)-->  
+                                    @Html.LabelFor(x => x.Description)
+                                    @Html.TextAreaFor(x => x.Description, new { @class = "form-control", @placeholder = "Describe your course", @rows="5"})   
+                                    @Html.ValidationMessageFor(x => x.Description)
+                                </div>
+
+                                <!-- Form Row  - Start and End dates -->
+                                <div class="row gx-3 mb-3">
+                                    <!-- Form Group (first name)-->
+                                    <div class="col-md-6">
+                                        @Html.LabelFor(x => x.StartDate)
+                                        @Html.TextBoxFor(x => x.StartDate, new { @class = "form-control", @placeholder = "Enter your first name", @value = @Model.StartDate})
+                                        @Html.ValidationMessageFor(x => x.StartDate)
+                                    </div>
+                                    <!-- Form Group (last name)-->
+                                    <div class="col-md-6">
+                                        @Html.LabelFor(x => x.EndDate)
+                                        @Html.TextBoxFor(x => x.EndDate, new { @class = "form-control", @placeholder = "Enter your last name", @value = @Model.EndDate})
+                                        @Html.ValidationMessageFor(x => x.EndDate)
+                                    </div>
+                                </div>
+
+                                
+                                <!-- Form Group - Price -->
+                                <div class="mb-3">
+                                        @Html.LabelFor(x => x.Price)
+                                        @Html.TextBoxFor(x => x.Price, new { @class = "form-control", @placeholder = "Enter price for your course", @value = @Model.Price})   
+                                        @Html.ValidationMessageFor(x => x.Price)
+                                </div>
+                                
+
+                                <!-- Save changes button-->
+                                <button class="btn btn-primary" type="submit">Pay for advertisement</button>
+                            }
+                
+                        
+                    </div>
+                </div>
+        
+
+    </div>
+</div>
+
+
+@section Scripts
+{
+    <partial name="_ValidationScriptsPartial" />
+
+    <script src="~/lib/inputmask/jquery.inputmask.bundle.min.js"></script>
+
+    <script>
+
+        $(document).ready(function() {
+
+
+
+
+        });
+
+    </script>
+
+
 }

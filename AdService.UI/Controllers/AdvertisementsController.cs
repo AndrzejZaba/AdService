@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using AdService.Application.Advertisements.CourseAdvertisements.Commands;
+using Microsoft.AspNetCore.Mvc;
 
 namespace AdService.UI.Controllers
 {
@@ -11,6 +12,10 @@ namespace AdService.UI.Controllers
         public IActionResult MyCoursesAdvertisements()
         {
             return View();
+        }
+        public async Task<IActionResult> AddCourseAdvertisement()
+        {
+            return View(new AddCourseAdvertisementCommand());
         }
     }
 }
