@@ -119,13 +119,30 @@
 
         $(document).ready(function() {
 
+            var today = new Date();
+            today.setHours(0, 0, 0, 0); // Resets time to midnight
+
             $('#dtpStartDate').datetimepicker({
-                format: 'L'
+                format: 'L',
+                useCurrent: true, // Automatically use today's date
+                minDate: today // Set minimum date to today
             })
             
             $('#dtpEndDate').datetimepicker({
-                format: 'L'
+                format: 'L',
+                useCurrent: false, // Prevent auto-setting the current date
+                minDate: moment(today).add(1, 'days') // Tomorrow's date as the minimum
             })
+
+            // Update EndDate minimum date whenever StartDate changes
+            $('#dtpStartDate').on('change.datetimepicker', function (e) {
+                var minDateForEnd = e.date.add(1, 'days'); // Set the minimum date for EndDate as one day after StartDate
+                $('#dtpEndDate').datetimepicker('minDate', minDateForEnd);
+                var currentEndDate = $('#dtpEndDate').datetimepicker('date');
+                if (currentEndDate && currentEndDate < minDateForEnd) {
+                    $('#dtpEndDate').datetimepicker('date', minDateForEnd);
+                }
+            });
 
             var pricePerDay = 100; // Price per day
 

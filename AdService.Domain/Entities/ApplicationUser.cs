@@ -13,5 +13,6 @@ public class ApplicationUser : IdentityUser
 
     public Address Address { get; set; }
     public Client Client { get; set; }
-    public ICollection<Advertisement> Advertisements { get; set; } = new HashSet<Advertisement>();
+    public ICollection<JobAdvert> JobAdverts { get; set; } = new HashSet<JobAdvert>();
+    public ICollection<CourseAdvert> CourseAdverts { get; set; } = new HashSet<CourseAdvert>();
 }

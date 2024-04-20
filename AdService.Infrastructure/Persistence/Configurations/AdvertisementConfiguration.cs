@@ -4,9 +4,9 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace AdService.Infrastructure.Persistence.Configurations;
 
-public class AdvertisementConfiguration : IEntityTypeConfiguration<Advertisement>
+public abstract class AdvertisementConfiguration<T> : IEntityTypeConfiguration<T> where T : Advertisement
 {
-    public void Configure(EntityTypeBuilder<Advertisement> builder)
+    public virtual void Configure(EntityTypeBuilder<T> builder)
     {
 
         builder.ToTable("Advertisements");
@@ -33,17 +33,11 @@ public class AdvertisementConfiguration : IEntityTypeConfiguration<Advertisement
         builder.Property(x => x.WebsiteUrl)
            .IsUnicode(false);
 
-        builder
-            .HasOne(x => x.User)
-            .WithMany(x => x.Advertisements)
-            .HasForeignKey(x => x.UserId)
-            .OnDelete(DeleteBehavior.Restrict);
-        
-        builder
-            .HasOne(x => x.Category)
-            .WithMany(x => x.Advertisements)
-            .HasForeignKey(x => x.CategoryId)
-            .OnDelete(DeleteBehavior.Restrict);
+        //builder
+        //    .HasOne(x => x.Category)
+        //    .WithMany(x => x.Advertisements)
+        //    .HasForeignKey(x => x.CategoryId)
+        //    .OnDelete(DeleteBehavior.Restrict);
 
     }
 
