@@ -22,7 +22,7 @@ namespace AdService.UI.Controllers
         }
         public async Task<IActionResult> AddCourseAdvertisement()
         {
-            return View(new AddCourseAdvertisementCommand {StartDate = _dateTimeService.Now, EndDate = _dateTimeService.Now.AddDays(7) });
+            return View(new AddCourseAdvertCommand {StartDate = _dateTimeService.Now, EndDate = _dateTimeService.Now.AddDays(7) });
         }
     }
 }

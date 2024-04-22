@@ -1,6 +1,6 @@
 ﻿@using AdService.Application.Advertisements.CourseAdvertisements.Commands;
 
-@model AddCourseAdvertisementCommand
+@model AddCourseAdvertCommand
 
 @{
     ViewData["Title"] = "My Profile";
@@ -77,10 +77,10 @@
 
                                 
                                 <!-- Form Group - CoursePrice -->
-                                <div class="mb-3">
-                                        @Html.LabelFor(x => x.Price)
-                                        @Html.TextBoxFor(x => x.Price, new { @class = "form-control", @placeholder = "Enter price for your course", @value = @Model.Price})   
-                                        @Html.ValidationMessageFor(x => x.Price)
+                                <div class="mb-5">
+                                        @Html.LabelFor(x => x.CoursePrice)
+                                        @Html.TextBoxFor(x => x.CoursePrice, "{0:#.#}", new { @class = "form-control", @placeholder = "Enter price for your course"})   
+                                        @Html.ValidationMessageFor(x => x.CoursePrice)
                                 </div>
                                 
                                 <!-- Form Group - Price -->

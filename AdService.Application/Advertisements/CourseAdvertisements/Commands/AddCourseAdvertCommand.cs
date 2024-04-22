@@ -14,9 +14,16 @@ public class AddCourseAdvertisementCommand : IRequest
     [Required(ErrorMessage = "Course's Description is required.")]
     [DisplayName("Describe your course...")]
     public string Description { get; set; }
+    
+    [Required(ErrorMessage = "Location is required.")]
+    [DisplayName("What's your course location...")]
+    public string Location { get; set; }
 
     [Required(ErrorMessage = "Course's Price is required.")]
-    [DisplayName("Price")]
+    [DisplayName("Course's Price")]
+    public decimal CoursePrice { get; set; }
+    
+    [DisplayName("Price to pay for advertisement")]
     public decimal Price { get; set; }
 
     [Required(ErrorMessage = "Choose advertisement start date")]
