@@ -5,11 +5,11 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace AdService.Infrastructure.Persistence.Configurations;
 
-public class JobAdvertConfiguration : IEntityTypeConfiguration<JobAdvert>
+public class CourseAdvertConfiguration : IEntityTypeConfiguration<CourseAdvert>
 {
-    public void Configure(EntityTypeBuilder<JobAdvert> builder)
+    public void Configure(EntityTypeBuilder<CourseAdvert> builder)
     {
-        builder.ToTable("JobAdverts");
+        builder.ToTable("CourseAdverts");
 
         builder.Property(x => x.Id)
             .IsRequired();
@@ -22,10 +22,10 @@ public class JobAdvertConfiguration : IEntityTypeConfiguration<JobAdvert>
             .IsRequired();
 
         builder.Property(x => x.Price)
-            .IsRequired();
+           .IsRequired();
 
         builder.Property(x => x.WebsiteUrl)
-            .IsUnicode(false);
+           .IsUnicode(false);
 
 
 
@@ -37,12 +37,12 @@ public class JobAdvertConfiguration : IEntityTypeConfiguration<JobAdvert>
 
         builder
             .HasOne(x => x.User)
-            .WithMany(x => x.JobAdverts)
+            .WithMany(x => x.CourseAdverts)
             .HasForeignKey(x => x.UserId)
             .OnDelete(DeleteBehavior.Restrict);
 
         builder.HasOne(x => x.Category)
-           .WithMany(x => x.JobAdverts) // Now referencing the correct collection
+           .WithMany(x => x.CourseAdverts) 
            .HasForeignKey(x => x.CategoryId)
            .OnDelete(DeleteBehavior.Restrict);
     }

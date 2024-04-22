@@ -17,6 +17,8 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>, IApplica
 
     public DbSet<Address> Addresses { get; set; }
     public DbSet<Advertisement> Advertisements { get; set; }
+    public DbSet<JobAdvert> JobAdverts { get; set; }
+    public DbSet<CourseAdvert> CourseAdverts { get; set; }
     public DbSet<Client> Clients { get; set; }
     public DbSet<Category> Categories { get; set; }
     public DbSet<Settings> Settings  { get; set; }
