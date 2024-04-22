@@ -16,7 +16,6 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>, IApplica
     }
 
     public DbSet<Address> Addresses { get; set; }
-    public DbSet<Advertisement> Advertisements { get; set; }
     public DbSet<JobAdvert> JobAdverts { get; set; }
     public DbSet<CourseAdvert> CourseAdverts { get; set; }
     public DbSet<Client> Clients { get; set; }
@@ -28,6 +27,8 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>, IApplica
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly()); // W tym miejscu zostaną zaaplikowane wszystkie konfiguracje implementujące typ EntityTypeBuilder - czyli klasy w folderze Configurations
+
+        modelBuilder.Ignore<Advertisement>();
 
         modelBuilder.SeedSettings();
         modelBuilder.SeedSettingsPositions();

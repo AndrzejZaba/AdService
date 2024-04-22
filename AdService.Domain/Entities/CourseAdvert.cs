@@ -4,6 +4,7 @@ namespace AdService.Domain.Entities;
 
 public class CourseAdvert : Advertisement
 {
+    public string Id { get; set; }
     public decimal CoursePrice { get; set; }
     public string CourseImage { get; set; }
 

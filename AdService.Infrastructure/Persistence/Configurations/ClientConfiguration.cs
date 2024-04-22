@@ -16,6 +16,9 @@ public class ClientConfiguration : IEntityTypeConfiguration<Client>
         builder.Property(x => x.UserId)
             .IsRequired();
 
+        builder.Property(x => x.CompanyName)
+            .HasMaxLength(200);
+
     }
 
 }
