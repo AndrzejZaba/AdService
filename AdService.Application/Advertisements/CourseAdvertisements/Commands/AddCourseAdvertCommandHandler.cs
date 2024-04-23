@@ -2,6 +2,7 @@
 using AdService.Application.Common.Interfaces;
 using AdService.Domain.Entities;
 using MediatR;
+using Microsoft.AspNetCore.Http;
 
 namespace AdService.Application.Advertisements.CourseAdvertisements.Commands;
 
@@ -35,6 +36,7 @@ public class AddCourseAdvertCommandHandler : IRequestHandler<AddCourseAdvertComm
             Description = request.Description,
             Price = request.Price,
             CoursePrice = request.CoursePrice,
+            CourseImage = String.IsNullOrWhiteSpace(request.ImageUrl) ? "course_default.jpg" : request.ImageUrl,
             Location = request.Location,
             StartDate = request.StartDate,
             EndDate = request.EndDate,

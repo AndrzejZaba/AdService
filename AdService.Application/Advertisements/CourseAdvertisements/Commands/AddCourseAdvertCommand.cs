@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace AdService.Application.Advertisements.CourseAdvertisements.Commands;
 
-public class AddCourseAdvertisementCommand : IRequest
+public class AddCourseAdvertCommand : IRequest
 {
     [Required(ErrorMessage = "Course's Title is required.")]
     [DisplayName("Title")]
@@ -35,5 +35,8 @@ public class AddCourseAdvertisementCommand : IRequest
     public DateTime EndDate { get; set; }
 
     [DisplayName("Upload images related to your course.")]
-    public IEnumerable<IFormFile> Images { get; set; }
+    public IFormFile ImageFile { get; set; }
+
+    [DisplayName("Course Image")]
+    public string ImageUrl { get; set; }
 }

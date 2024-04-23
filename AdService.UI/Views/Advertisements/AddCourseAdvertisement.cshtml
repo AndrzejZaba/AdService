@@ -28,15 +28,14 @@
 
                                 <!-- Form Group (username)-->
                                 <div class="mb-3">
-                                    @*<label class="small mb-1" for="inputUsername">Email</label>*@
                                     @Html.LabelFor(x => x.Title)
                                     @Html.TextBoxFor(x => x.Title, new { @class = "form-control", @placeholder = "Enter your course's Title"})
+                                    @Html.ValidationMessageFor(x => x.Title)
                                 </div>
 
 
                                 <!-- Form Row-->
                                 <div class="mb-3">
-                                    <!-- Form Group (first name)-->  
                                     @Html.LabelFor(x => x.Description)
                                     @Html.TextAreaFor(x => x.Description, new { @class = "form-control", @placeholder = "Describe your course", @rows="5"})   
                                     @Html.ValidationMessageFor(x => x.Description)
@@ -75,6 +74,28 @@
 
                                 </div>
 
+                                <!-- Form Row - Location and Image-->
+                                <div class="row gx-3 mb-3">
+                                
+                                    <!-- Location -->
+                                    <div class="col-md-6">
+                                        <div class="mb-3">
+                                            @Html.LabelFor(x => x.Location)
+                                            @Html.TextBoxFor(x => x.Location, new { @class = "form-control", @placeholder = "Enter your course's Location"})
+                                            @Html.ValidationMessageFor(x => x.Location)
+                                        </div>
+                                    </div>
+                                    
+                                    <!-- Image -->
+                                    <div class="col-md-6">
+                                        <div class="mb-3">
+                                            @Html.LabelFor(x => x.ImageFile)
+                                            <input asp-for="ImageFile" class="form-control" type="file" accept=".jpg, .jpeg, .png">
+                                        </div>
+                                    </div>
+
+
+                                </div>
                                 
                                 <!-- Form Group - CoursePrice -->
                                 <div class="mb-5">
