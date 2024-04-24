@@ -1,9 +1,9 @@
-﻿@using AdService.Application.Advertisements.CourseAdvertisements.Commands;
+﻿@using AdService.Application.Advertisements.CourseAdvertisements.Queries;
 
-@model AddCourseAdvertCommand
+@model AddCourseAdvertVm
 
 @{
-    ViewData["Title"] = "My Profile";
+    ViewData["Title"] = "Add Course Advertisement";
 }
 
 @section Styles{
@@ -18,7 +18,7 @@
         
                 <!-- Account details card-->
                 <div class="card mb-4 card-primary card-border-top">
-                    <div class="card-header">Account Details</div>
+                    <div class="card-header">Course Details</div>
                         <div class="card-body">
                             @using (Html.BeginForm("AddCourseAdvertisement", "Advertisements"))
                             {
@@ -26,28 +26,38 @@
                                 @Html.AntiForgeryToken()
                                 
 
-                                <!-- Form Group (username)-->
+                                <!-- Form Group - Title -->
                                 <div class="mb-3">
-                                    @Html.LabelFor(x => x.Title)
-                                    @Html.TextBoxFor(x => x.Title, new { @class = "form-control", @placeholder = "Enter your course's Title"})
-                                    @Html.ValidationMessageFor(x => x.Title)
+                                    @Html.LabelFor(x => x.CourseAdvert.Title)
+                                    @Html.TextBoxFor(x => x.CourseAdvert.Title, new { @class = "form-control", @placeholder = "Enter your course's Title"})
+                                    @Html.ValidationMessageFor(x => x.CourseAdvert.Title)
+                                </div>
+
+                                <!-- Form Row - Category Dropdown -->
+                                <div class="mb-3">
+                                    @Html.LabelFor(x => x.CourseAdvert.CategoryId)
+                                    @Html.DropDownList("Ticket.TicketTypeId", @Model.AvailableCategories.Select(
+                                        x => new SelectListItem(x.Name, x.Id.ToString())),
+                                    null, htmlAttributes: new { @class="form-control", style="width: 100%;"})
+
+                                    @Html.ValidationMessageFor(x => x.CourseAdvert.CategoryId)
                                 </div>
 
 
                                 <!-- Form Row-->
                                 <div class="mb-3">
-                                    @Html.LabelFor(x => x.Description)
-                                    @Html.TextAreaFor(x => x.Description, new { @class = "form-control", @placeholder = "Describe your course", @rows="5"})   
-                                    @Html.ValidationMessageFor(x => x.Description)
+                                    @Html.LabelFor(x => x.CourseAdvert.Description)
+                                    @Html.TextAreaFor(x => x.CourseAdvert.Description, new { @class = "form-control", @placeholder = "Describe your course", @rows="5"})   
+                                    @Html.ValidationMessageFor(x => x.CourseAdvert.Description)
                                 </div>
 
                                 <!-- Form Row  - Start and End dates -->
                                 <div class="row gx-3 mb-3">
                                     <!-- Start date -->
                                     <div class="col-md-6">
-                                        @Html.LabelFor(x => x.StartDate)
+                                        @Html.LabelFor(x => x.CourseAdvert.StartDate)
                                         <div class="input-group date" id="dtpStartDate" data-target-input="nearest">
-                                            <input asp-for="StartDate" type="text" class="form-control datetimepicker-input" data-target="#dtpStartDate" value="@Model.StartDate.ToString("dd-MM-yyyy")" />
+                                            <input asp-for="CourseAdvert.StartDate" type="text" class="form-control datetimepicker-input" data-target="#dtpStartDate" value="@Model.CourseAdvert.StartDate.ToString("dd-MM-yyyy")" />
                                             <div class="input-group-append" data-target="#dtpStartDate" data-toggle="datetimepicker">
                                                 <div class="input-group-text calendar">
                                                     <i class="fa fa-calendar-days"></i>
@@ -55,13 +65,13 @@
                                             </div>
                                         </div>
 
-                                        @Html.ValidationMessageFor(x => x.StartDate)
+                                        @Html.ValidationMessageFor(x => x.CourseAdvert.StartDate)
                                     </div>
                                     <!-- End date -->
                                     <div class="col-md-6">
-                                        @Html.LabelFor(x => x.EndDate)
+                                        @Html.LabelFor(x => x.CourseAdvert.EndDate)
                                         <div class="input-group date" id="dtpEndDate" data-target-input="nearest">
-                                            <input asp-for="EndDate" type="text" class="form-control datetimepicker-input" data-target="#dtpEndDate" />
+                                            <input asp-for="CourseAdvert.EndDate" type="text" class="form-control datetimepicker-input" data-target="#dtpEndDate" />
                                             <div class="input-group-append" data-target="#dtpEndDate" data-toggle="datetimepicker">
                                                 <div class="input-group-text calendar">
                                                     <i class="fa fa-calendar-days"></i>
@@ -69,7 +79,7 @@
                                             </div>
                                         </div>
 
-                                        @Html.ValidationMessageFor(x => x.EndDate)
+                                        @Html.ValidationMessageFor(x => x.CourseAdvert.EndDate)
                                     </div>
 
                                 </div>
@@ -80,17 +90,17 @@
                                     <!-- Location -->
                                     <div class="col-md-6">
                                         <div class="mb-3">
-                                            @Html.LabelFor(x => x.Location)
-                                            @Html.TextBoxFor(x => x.Location, new { @class = "form-control", @placeholder = "Enter your course's Location"})
-                                            @Html.ValidationMessageFor(x => x.Location)
+                                            @Html.LabelFor(x => x.CourseAdvert.Location)
+                                            @Html.TextBoxFor(x => x.CourseAdvert.Location, new { @class = "form-control", @placeholder = "Enter your course's Location"})
+                                            @Html.ValidationMessageFor(x => x.CourseAdvert.Location)
                                         </div>
                                     </div>
                                     
                                     <!-- Image -->
                                     <div class="col-md-6">
                                         <div class="mb-3">
-                                            @Html.LabelFor(x => x.ImageFile)
-                                            <input asp-for="ImageFile" class="form-control" type="file" accept=".jpg, .jpeg, .png">
+                                            @Html.LabelFor(x => x.CourseAdvert.ImageFile)
+                                            <input asp-for="CourseAdvert.ImageFile" class="form-control" type="file" accept=".jpg, .jpeg, .png">
                                         </div>
                                     </div>
 
@@ -99,16 +109,16 @@
                                 
                                 <!-- Form Group - CoursePrice -->
                                 <div class="mb-5">
-                                        @Html.LabelFor(x => x.CoursePrice)
-                                        @Html.TextBoxFor(x => x.CoursePrice, "{0:#.#}", new { @class = "form-control", @placeholder = "Enter price for your course"})   
-                                        @Html.ValidationMessageFor(x => x.CoursePrice)
+                                        @Html.LabelFor(x => x.CourseAdvert.CoursePrice)
+                                        @Html.TextBoxFor(x => x.CourseAdvert.CoursePrice, "{0:#.#}", new { @class = "form-control", @placeholder = "Enter price for your course"})   
+                                        @Html.ValidationMessageFor(x => x.CourseAdvert.CoursePrice)
                                 </div>
                                 
                                 <!-- Form Group - Price -->
                                 <div class="mb-3">
-                                    @Html.LabelFor(x => x.Price)
-                                    @Html.TextBoxFor(x => x.Price, new { @id = "CalculatedPrice", @class = "form-control", @readonly = "readonly"})
-                                    @Html.ValidationMessageFor(x => x.Price)
+                                    @Html.LabelFor(x => x.CourseAdvert.Price)
+                                    @Html.TextBoxFor(x => x.CourseAdvert.Price, new { @id = "CalculatedPrice", @class = "form-control", @readonly = "readonly"})
+                                    @Html.ValidationMessageFor(x => x.CourseAdvert.Price)
                                 </div>
 
                                 

@@ -26,6 +26,10 @@ public class AddCourseAdvertCommand : IRequest
     [DisplayName("Price to pay for advertisement")]
     public decimal Price { get; set; }
 
+    [DisplayName("Category")]
+    public int CategoryId { get; set; }
+    public string UserId { get; set; }
+
     [Required(ErrorMessage = "Choose advertisement start date")]
     [DisplayName("Start advertising from...")]
     public DateTime StartDate { get; set; }

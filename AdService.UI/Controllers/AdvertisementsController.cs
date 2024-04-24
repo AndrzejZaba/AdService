@@ -1,4 +1,5 @@
 ﻿using AdService.Application.Advertisements.CourseAdvertisements.Commands;
+using AdService.Application.Advertisements.CourseAdvertisements.Queries;
 using AdService.Application.Common.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
@@ -22,7 +23,7 @@ namespace AdService.UI.Controllers
         }
         public async Task<IActionResult> AddCourseAdvertisement()
         {
-            return View(new AddCourseAdvertCommand {StartDate = _dateTimeService.Now, EndDate = _dateTimeService.Now.AddDays(7) });
+            return View(await Mediator.Send(new GetAddCourseAdvertQuery()));
         }
     }
 }
