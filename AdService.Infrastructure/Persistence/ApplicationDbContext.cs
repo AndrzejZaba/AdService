@@ -33,6 +33,7 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>, IApplica
         modelBuilder.SeedSettings();
         modelBuilder.SeedSettingsPositions();
         modelBuilder.SeedRoles();
+        modelBuilder.SeedCategories();
 
         base.OnModelCreating(modelBuilder);
     }
