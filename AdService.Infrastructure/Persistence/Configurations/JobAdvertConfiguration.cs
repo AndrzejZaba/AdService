@@ -24,6 +24,10 @@ public class JobAdvertConfiguration : IEntityTypeConfiguration<JobAdvert>
         builder.Property(x => x.Price)
             .IsRequired();
 
+        builder.Property(x => x.Location)
+            .HasMaxLength(200)
+            .IsRequired();
+
         builder.Property(x => x.WebsiteUrl)
             .IsUnicode(false);
 
