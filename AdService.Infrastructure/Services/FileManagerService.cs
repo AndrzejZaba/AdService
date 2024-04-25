@@ -4,17 +4,17 @@ using Microsoft.AspNetCore.Http;
 
 namespace AdService.Infrastructure.Services;
 
-public class FileManagerService : IFileManagerService
+public class FileImageManagerService : IFileImageManagerService
 {
     private readonly IWebHostEnvironment _webHostEnvironment;
 
-    public FileManagerService(IWebHostEnvironment webHostEnvironment)
+    public FileImageManagerService(IWebHostEnvironment webHostEnvironment)
     {
         _webHostEnvironment = webHostEnvironment;
     }
-    public async Task Upload(IFormFile file)
+    public async Task UploadImage(IFormFile file, string fileName)
     {
-        var folderRoot = Path.Combine(_webHostEnvironment.WebRootPath, "Content", "Files");
+        var folderRoot = Path.Combine(_webHostEnvironment.WebRootPath, "Content", "Images");
 
         if (!Directory.Exists(folderRoot))
             Directory.CreateDirectory(folderRoot);
@@ -22,7 +22,7 @@ public class FileManagerService : IFileManagerService
         if (file == null)
             return;
 
-        var filePath = Path.Combine(folderRoot, file.FileName);
+        var filePath = Path.Combine(folderRoot, fileName);
 
         using (var stream = new FileStream(filePath, FileMode.Create))
         {

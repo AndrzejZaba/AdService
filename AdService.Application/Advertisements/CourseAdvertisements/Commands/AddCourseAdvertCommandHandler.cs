@@ -10,20 +10,30 @@ public class AddCourseAdvertCommandHandler : IRequestHandler<AddCourseAdvertComm
 {
     private readonly IApplicationDbContext _context;
     private readonly IDateTimeService _dateTimeService;
+    private readonly IFileImageManagerService _fileImageManagerService;
+    private readonly IFileImageNameService _fileImageNameService;
 
-    public AddCourseAdvertCommandHandler(IApplicationDbContext context, IDateTimeService dateTimeService)
+    public AddCourseAdvertCommandHandler(
+        IApplicationDbContext context, 
+        IDateTimeService dateTimeService, 
+        IFileImageManagerService fileImageManagerService,
+        IFileImageNameService fileImageNameService)
     {
         _context = context;
         _dateTimeService = dateTimeService;
+        _fileImageManagerService = fileImageManagerService;
+        _fileImageNameService = fileImageNameService;
     }
     public async Task<Unit> Handle(AddCourseAdvertCommand request, CancellationToken cancellationToken)
     {
         var sessionId = Guid.NewGuid().ToString();
 
+        request.ImageUrl = _fileImageNameService.GetFileName(request.ImageFile.FileName, request.UserId, _dateTimeService.Now);
+
+        await _fileImageManagerService.UploadImage(request.ImageFile, filename);
+
         await AddToDatabase(request, sessionId, cancellationToken);
 
-        await Task.FromResult(0);
-        //throw new NotImplementedException();
         return Unit.Value;
     }
 

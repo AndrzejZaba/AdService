@@ -3,7 +3,7 @@
 
 namespace AdService.Application.Common.Interfaces;
 
-public interface IFileManagerService
+public interface IFileImageManagerService
 {
-    Task Upload(IFormFile file);
+    Task UploadImage(IFormFile file, string fileName);
 }
