@@ -27,10 +27,12 @@ public class AddCourseAdvertCommandHandler : IRequestHandler<AddCourseAdvertComm
     {
         var sessionId = Guid.NewGuid().ToString();
 
-        request.ImageUrl = _fileImageNameService.GetFileName(request.ImageFile.FileName, request.UserId, _dateTimeService.Now);
-
-        await _fileImageManagerService.UploadImage(request.ImageFile, request.ImageUrl);
-
+        if (request.ImageFile != null)
+        {
+            request.ImageUrl = _fileImageNameService.GetFileName(request.ImageFile.FileName, sessionId, _dateTimeService.Now);
+            await _fileImageManagerService.UploadImage(request.ImageFile, request.ImageUrl);
+        }
+        
         await AddToDatabase(request, sessionId, cancellationToken);
 
         return Unit.Value;

@@ -9,5 +9,5 @@ namespace AdService.Application.Common.Interfaces;
 
 public interface IFileImageNameService
 {
-    string GetFileName(string fileName, string userId, DateTime creationDateTime);
+    string GetFileName(string fileName, string id, DateTime creationDateTime);
 }
