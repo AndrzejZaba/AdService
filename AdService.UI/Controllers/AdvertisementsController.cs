@@ -47,6 +47,9 @@ namespace AdService.UI.Controllers
             if (!result.IsValid)
                 return View(vm);
 
+            TempData["Success"] = "New course advert has beed added!";
+
+
             // Dodanie ogłoszenia bez płatności
             return RedirectToAction("MyCoursesAdvertisements");
         }
