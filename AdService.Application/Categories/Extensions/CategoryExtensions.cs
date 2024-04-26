@@ -1,4 +1,4 @@
-﻿using AdService.Application.Advertisements.CourseAdvertisements.Queries;
+﻿using AdService.Application.Advertisements.CourseAdvertisements.Queries.GetAddCourseAdvert;
 using AdService.Domain.Entities;
 
 

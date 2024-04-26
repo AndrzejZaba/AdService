@@ -1,10 +1,10 @@
-﻿using AdService.Application.Advertisements.CourseAdvertisements.Commands;
+﻿using AdService.Application.Advertisements.CourseAdvertisements.Commands.AddCourseAdvert;
 using AdService.Application.Categories.Extensions;
 using AdService.Application.Common.Interfaces;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 
-namespace AdService.Application.Advertisements.CourseAdvertisements.Queries;
+namespace AdService.Application.Advertisements.CourseAdvertisements.Queries.GetAddCourseAdvert;
 
 public class GetAddCourseAdvertQueryHandler : IRequestHandler<GetAddCourseAdvertQuery, AddCourseAdvertVm>
 {

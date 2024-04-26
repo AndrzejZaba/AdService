@@ -3,7 +3,7 @@ using AdService.Application.Common.Interfaces;
 using AdService.Domain.Entities;
 using MediatR;
 
-namespace AdService.Application.Advertisements.CourseAdvertisements.Commands;
+namespace AdService.Application.Advertisements.CourseAdvertisements.Commands.AddCourseAdvert;
 
 public class AddCourseAdvertCommandHandler : IRequestHandler<AddCourseAdvertCommand>
 {
@@ -13,8 +13,8 @@ public class AddCourseAdvertCommandHandler : IRequestHandler<AddCourseAdvertComm
     private readonly IFileImageNameService _fileImageNameService;
 
     public AddCourseAdvertCommandHandler(
-        IApplicationDbContext context, 
-        IDateTimeService dateTimeService, 
+        IApplicationDbContext context,
+        IDateTimeService dateTimeService,
         IFileImageManagerService fileImageManagerService,
         IFileImageNameService fileImageNameService)
     {
@@ -32,7 +32,7 @@ public class AddCourseAdvertCommandHandler : IRequestHandler<AddCourseAdvertComm
             request.ImageUrl = _fileImageNameService.GetFileName(request.ImageFile.FileName, sessionId, _dateTimeService.Now);
             await _fileImageManagerService.UploadImage(request.ImageFile, request.ImageUrl);
         }
-        
+
         await AddToDatabase(request, sessionId, cancellationToken);
 
         return Unit.Value;
@@ -47,7 +47,7 @@ public class AddCourseAdvertCommandHandler : IRequestHandler<AddCourseAdvertComm
             Description = request.Description,
             Price = request.Price,
             CoursePrice = request.CoursePrice,
-            CourseImage = String.IsNullOrWhiteSpace(request.ImageUrl) ? "course_default.jpg" : request.ImageUrl,
+            CourseImage = string.IsNullOrWhiteSpace(request.ImageUrl) ? "course_default.jpg" : request.ImageUrl,
             Location = request.Location,
             StartDate = request.StartDate,
             EndDate = request.EndDate,

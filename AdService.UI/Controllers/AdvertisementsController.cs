@@ -1,5 +1,6 @@
-﻿using AdService.Application.Advertisements.CourseAdvertisements.Commands;
+﻿using AdService.Application.Advertisements.CourseAdvertisements.Commands.AddCourseAdvert;
 using AdService.Application.Advertisements.CourseAdvertisements.Queries;
+using AdService.Application.Advertisements.CourseAdvertisements.Queries.GetAddCourseAdvert;
 using AdService.Application.Common.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
