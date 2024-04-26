@@ -2,7 +2,6 @@
 using AdService.Application.Common.Interfaces;
 using AdService.Domain.Entities;
 using MediatR;
-using Microsoft.AspNetCore.Http;
 
 namespace AdService.Application.Advertisements.CourseAdvertisements.Commands;
 
@@ -30,7 +29,7 @@ public class AddCourseAdvertCommandHandler : IRequestHandler<AddCourseAdvertComm
 
         request.ImageUrl = _fileImageNameService.GetFileName(request.ImageFile.FileName, request.UserId, _dateTimeService.Now);
 
-        await _fileImageManagerService.UploadImage(request.ImageFile, filename);
+        await _fileImageManagerService.UploadImage(request.ImageFile, request.ImageUrl);
 
         await AddToDatabase(request, sessionId, cancellationToken);
 
@@ -51,8 +50,14 @@ public class AddCourseAdvertCommandHandler : IRequestHandler<AddCourseAdvertComm
             StartDate = request.StartDate,
             EndDate = request.EndDate,
             CreationDate = _dateTimeService.Now,
-            WebsiteUrl = SlugHelper.GenerateSlug(request.Title, request.Location, sessionId)
+            WebsiteUrl = SlugHelper.GenerateSlug(request.Title, request.Location, sessionId),
+            UserId = request.UserId,
+            CategoryId = request.CategoryId,
+
         };
+
+        _context.CourseAdverts.Add(courseAdvert);
+        await _context.SaveChangesAsync(cancellationToken);
 
     }
 }

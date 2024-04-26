@@ -21,11 +21,17 @@
                 <div class="card mb-4 card-primary card-border-top">
                     <div class="card-header">Course Details</div>
                         <div class="card-body">
-                            @using (Html.BeginForm("AddCourseAdvertisement", "Advertisements"))
+                            @using (Html.BeginForm("AddCourseAdvertisement", "Advertisements", FormMethod.Post, new { enctype = "multipart/form-data" }))
                             {
 
                                 @Html.AntiForgeryToken()
                                 
+                                @for (int i = 0; i < Model.AvailableCategories.Count(); i++)
+                                {
+                                    @Html.HiddenFor(model => Model.AvailableCategories[i].Id)
+                                    @Html.HiddenFor(model => Model.AvailableCategories[i].Name)
+                                }
+
 
                                 <!-- Form Group - Title -->
                                 <div class="mb-3">
@@ -38,7 +44,7 @@
                                 <div class="mb-3">
                                     @Html.LabelFor(x => x.CourseAdvert.CategoryId)
                                     <div class="select2-blue">
-                                        @Html.DropDownList("Ticket.TicketTypeId", @Model.AvailableCategories.Select(
+                                        @Html.DropDownList("CourseAdvert.CategoryId", @Model.AvailableCategories.Select(
                                             x => new SelectListItem(x.Name, x.Id.ToString())),
                                         null, htmlAttributes: new { @class="form-control select2-CategoryId", style="width: 100%;"})
 
