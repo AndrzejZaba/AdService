@@ -1,6 +1,7 @@
 ﻿using AdService.Application.Advertisements.CourseAdvertisements.Commands.AddCourseAdvert;
 using AdService.Application.Advertisements.CourseAdvertisements.Queries;
 using AdService.Application.Advertisements.CourseAdvertisements.Queries.GetAddCourseAdvert;
+using AdService.Application.Advertisements.CourseAdvertisements.Queries.GetUsersCourseAdverts;
 using AdService.Application.Common.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
@@ -18,9 +19,13 @@ namespace AdService.UI.Controllers
         {
             return View();
         } 
-        public IActionResult MyCoursesAdvertisements()
+        public async Task<IActionResult> MyCoursesAdvertisements()
         {
-            return View();
+            return View(await Mediator.Send(new GetUsersCourseAdvertsQuery
+            {
+                UserId = UserId,
+                PageSize = 3
+            }));
         }
         public async Task<IActionResult> AddCourseAdvertisement()
         {

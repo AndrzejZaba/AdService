@@ -1,4 +1,8 @@
-﻿
+﻿@using AdService.Application.Advertisements.CourseAdvertisements.Queries.GetUsersCourseAdverts;
+@using AdService.Application.Common.Models;
+
+@model PaginatedList<CourseAdvertBasicsDto>
+
 @{
     ViewData["Title"] = "My Courses Advertisements";
 }
@@ -19,9 +23,13 @@
 
 
         <div class="row row-cols-1 row-cols-md-3 g-4">
-            <div class="col">
-                <partial name="_CourseAdvertisement" />
-            </div>
+            @foreach (var item in Model.Items)
+            {
+                <div class="col">
+                    <partial name="_CourseAdvertisement" />
+                </div>
+            }
+            
         </div>
 
     </div>
