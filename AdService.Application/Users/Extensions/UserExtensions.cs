@@ -1,4 +1,5 @@
-﻿using AdService.Application.Clients.Commands.EditUser;
+﻿using AdService.Application.Advertisements.CourseAdvertisements.Queries.GetCourseAdvertPage;
+using AdService.Application.Clients.Commands.EditUser;
 using AdService.Application.Clients.Queries.GetClient;
 using AdService.Domain.Entities;
 
@@ -48,6 +49,24 @@ public static class UserExtensions
             PhoneNumber = user.PhoneNumber,
             NipNumber = user.Client?.NipNumber,
             IsPrivateAccount = user.Client?.IsPrivateAccount ?? true
+        };
+    }
+
+    public static UserCourseAdvertPageDto ToUserCourseAdvertPageDtoDto(this ApplicationUser user)
+    {
+        if (user == null)
+            return null;
+
+        return new UserCourseAdvertPageDto
+        {
+            Id = user.Id,
+            Email = user.Email,
+            FirstName = user.FirstName,
+            LastName = user.LastName,
+            NipNumber = user.Client?.NipNumber,
+            IsPrivateAccount = user.Client?.IsPrivateAccount ?? true,
+            CompanyName = user.Client?.CompanyName,
+            CompanyLogo = user.Client?.CompanyLogo
         };
     }
 }

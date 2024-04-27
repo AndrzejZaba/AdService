@@ -17,6 +17,7 @@ public static class CourseAdvertsExtensions
             Description = courseAdvert.Description,
             ImageUrl = courseAdvert.CourseImage,
             CoursePrice = courseAdvert.CoursePrice,
+            Location = courseAdvert.Location,
             StartDate = courseAdvert.StartDate,
             WebsiteUrl = courseAdvert.WebsiteUrl
         };

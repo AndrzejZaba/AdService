@@ -1,6 +1,7 @@
 ﻿using AdService.Application.Advertisements.CourseAdvertisements.Commands.AddCourseAdvert;
 using AdService.Application.Advertisements.CourseAdvertisements.Queries;
 using AdService.Application.Advertisements.CourseAdvertisements.Queries.GetAddCourseAdvert;
+using AdService.Application.Advertisements.CourseAdvertisements.Queries.GetCourseAdvertPage;
 using AdService.Application.Advertisements.CourseAdvertisements.Queries.GetUsersCourseAdverts;
 using AdService.Application.Common.Interfaces;
 using Microsoft.AspNetCore.Mvc;
@@ -59,6 +60,21 @@ namespace AdService.UI.Controllers
 
             // Dodanie ogłoszenia bez płatności
             return RedirectToAction("UserCourseAdverts");
+        }
+
+        [Route("courseadvert/{courseAdvertPageUrl}")]
+        public async Task<IActionResult> CourseAdvertPage (string courseAdvertPageUrl)
+        {
+            var page = await Mediator.Send(new GetCourseAdvertPageQuery 
+            { 
+                Url = courseAdvertPageUrl, 
+                UserId = UserId 
+            });
+
+            if (page == null)
+                return NotFound();
+
+            return View(page);
         }
     }
 }
