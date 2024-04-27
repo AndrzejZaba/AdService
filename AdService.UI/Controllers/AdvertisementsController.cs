@@ -19,12 +19,12 @@ namespace AdService.UI.Controllers
         {
             return View();
         } 
-        public async Task<IActionResult> MyCoursesAdvertisements(int page = 1)
+        public async Task<IActionResult> UserCourseAdverts(int page = 1)
         {
             return View(await Mediator.Send(new GetUsersCourseAdvertsQuery
             {
                 UserId = UserId,
-                PageSize = 3,
+                PageSize = 4,
                 PageNumber = page
             }));
         }
@@ -58,7 +58,7 @@ namespace AdService.UI.Controllers
 
 
             // Dodanie ogłoszenia bez płatności
-            return RedirectToAction("MyCoursesAdvertisements");
+            return RedirectToAction("UserCourseAdverts");
         }
     }
 }
