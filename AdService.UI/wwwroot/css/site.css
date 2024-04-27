@@ -88,6 +88,22 @@ body {
     font-size: 1.5rem;
 }
 
+.image-container {
+    width: 100%;
+    padding-top: 66.67%; /* 2/3 = 0.6667, co daje proporcje 3:2 */
+    position: relative;
+    background-color: white; /* T³o wype³niaj¹ce przestrzeñ */
+}
+
+.image-container img {
+    position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+    }
+
 /*styles for job advert - start*/
 .job-box {
     background: #fff;

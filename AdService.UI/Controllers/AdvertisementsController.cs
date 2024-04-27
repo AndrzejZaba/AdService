@@ -19,12 +19,13 @@ namespace AdService.UI.Controllers
         {
             return View();
         } 
-        public async Task<IActionResult> MyCoursesAdvertisements()
+        public async Task<IActionResult> MyCoursesAdvertisements(int page = 1)
         {
             return View(await Mediator.Send(new GetUsersCourseAdvertsQuery
             {
                 UserId = UserId,
-                PageSize = 3
+                PageSize = 3,
+                PageNumber = page
             }));
         }
         public async Task<IActionResult> AddCourseAdvertisement()

@@ -26,11 +26,20 @@
             @foreach (var item in Model.Items)
             {
                 <div class="col">
-                    <partial name="_CourseAdvertisement" />
+                    <partial name="_CourseAdvertisement" model="item" />
                 </div>
             }
             
         </div>
+
+        <ul class="pagination">  
+            @for (int i = 1; i <= Model.TotalPages; i++)  
+            {  
+                <li class="@(i == Model.PageIndex ? "page-item active" : "page-item")">  
+                    <a class="page-link" href="@Url.Action("MyCoursesAdvertisements", new { page = i })">@i</a>  
+                </li>  
+            }   
+    </ul>  
 
     </div>
 
