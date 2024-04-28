@@ -104,6 +104,25 @@ body {
         object-fit: contain;
     }
 
+
+.image-container-page {
+    width: 100%; /* lub okreœlona szerokoœæ, np. 500px */
+    height: 300px; /* maksymalna wysokoœæ kontenera, dostosuj wed³ug potrzeb */
+    position: relative;
+    overflow: hidden; /* zapobiega wystawaniu obrazu poza kontener */
+    display: flex;
+    align-items: center; /* wyœrodkowanie pionowe */
+    justify-content: center; /* wyœrodkowanie poziome */
+    background-color: #f8f9fa; /* t³o kontenera, opcjonalnie */
+}
+
+.center-image {
+    max-height: 100%; /* maksymalna wysokoœæ obrazu */
+    max-width: 100%; /* maksymalna szerokoœæ obrazu */
+    height: auto; /* zachowanie proporcji */
+    width: auto; /* zachowanie proporcji */
+    object-fit: contain; /* zachowuje proporcje bez rozci¹gania */
+}
 /*styles for job advert - start*/
 .job-box {
     background: #fff;

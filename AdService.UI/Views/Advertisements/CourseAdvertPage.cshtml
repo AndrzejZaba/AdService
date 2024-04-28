@@ -1,8 +1,7 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@{
-}
+﻿@using AdService.Application.Advertisements.CourseAdvertisements.Queries.GetCourseAdvertPage;
+
+
+@model CourseAdvertPageVm
 
 
 <div>
@@ -11,8 +10,11 @@
 
         <div class="col-md-8">
 
-            
+            <div class="card mb-4 card-primary card-border-top" style="padding: 18px;">
+                
+                <h3>@Model.CourseAdvert.Title</h3>
 
+            </div>
         </div>
         
         <div class="col-md-4">

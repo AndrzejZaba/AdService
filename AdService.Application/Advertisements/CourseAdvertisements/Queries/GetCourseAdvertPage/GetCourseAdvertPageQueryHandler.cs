@@ -16,23 +16,23 @@ public class GetCourseAdvertPageQueryHandler : IRequestHandler<GetCourseAdvertPa
     }
     public async Task<CourseAdvertPageVm> Handle(GetCourseAdvertPageQuery request, CancellationToken cancellationToken)
     {
-        var courseAdvert = await _context
-            .CourseAdverts
-            .AsNoTracking()
-            .Select(x => x.ToBasicsDto())
-            .FirstOrDefaultAsync(x => x.WebsiteUrl == request.Url);
-
         var user = await _context
             .Users
             .AsNoTracking()
             .Include(x => x.Client)
-            .Select(x => x.ToUserCourseAdvertPageDtoDto())
             .FirstOrDefaultAsync(x => x.Id == request.UserId);
+
+        var courseAdvert = await _context
+            .CourseAdverts
+            .AsNoTracking()
+            .FirstOrDefaultAsync(x => x.WebsiteUrl == request.Url);
+
+        
 
         var pageVm = new CourseAdvertPageVm
         {
-            CourseAdvert = courseAdvert,
-            User = user
+            CourseAdvert = courseAdvert.ToBasicsDto(),
+            User = user.ToUserCourseAdvertPageDto()
         };
 
         return pageVm;

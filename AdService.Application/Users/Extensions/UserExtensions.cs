@@ -52,7 +52,7 @@ public static class UserExtensions
         };
     }
 
-    public static UserCourseAdvertPageDto ToUserCourseAdvertPageDtoDto(this ApplicationUser user)
+    public static UserCourseAdvertPageDto ToUserCourseAdvertPageDto(this ApplicationUser user)
     {
         if (user == null)
             return null;
