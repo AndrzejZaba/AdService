@@ -26,6 +26,7 @@ public class AddCourseAdvertCommand : IRequest
     [DisplayName("Price to pay for advertisement")]
     public decimal Price { get; set; }
 
+    [Required(ErrorMessage = "Category is required.")]
     [DisplayName("Category")]
     public int CategoryId { get; set; }
     public string UserId { get; set; }
@@ -38,7 +39,7 @@ public class AddCourseAdvertCommand : IRequest
     [DisplayName("Display advertismenet untill...")]
     public DateTime EndDate { get; set; }
 
-    [DisplayName("Upload images related to your course.")]
+    [DisplayName("Upload image related to your course.")]
     public IFormFile ImageFile { get; set; }
 
     [DisplayName("Course Image")]

@@ -1,0 +1,29 @@
+﻿<script src="~/lib/summernote/summernote-lite.min.js"></script>
+<script src="~/lib/summernote/lang/summernote-en-US.min.js"></script>
+
+<script>
+
+    var culture = 'en-US';
+
+    function init(id, height = 400){
+        $(id).summernote({
+            height: height,
+            minHeight: 200,
+            maxHeight: 500,
+            callbacks: {
+
+            },
+            toolbar: [
+                
+                ['font', ['bold', 'italic']],
+                ['para', ['ul']],                
+            ],
+            lang: culture,
+
+        });
+
+        $('.note-editable').css('font-size', '18px');
+
+    }
+
+</script>
