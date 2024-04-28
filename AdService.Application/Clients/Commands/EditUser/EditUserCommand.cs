@@ -1,6 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel;
 using MediatR;
+using Microsoft.AspNetCore.Http;
 
 namespace AdService.Application.Clients.Commands.EditUser;
 
@@ -32,6 +33,13 @@ public class EditUserCommand : IRequest
     //[Required(ErrorMessage = "Field 'Nip number' is required.")]
     [DisplayName("Nip number")]
     public string NipNumber { get; set; }
+
+    [DisplayName("Company Name")]
+    public string ComapnyName { get; set; }
+
+    [DisplayName("Upload your company logo.")]
+    public IFormFile LogoFile { get; set; }
+    public string LogoUrl { get; set; }
 
 
     [Required(ErrorMessage = "Field 'Country' is required.")]

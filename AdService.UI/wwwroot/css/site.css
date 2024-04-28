@@ -59,6 +59,11 @@ body {
 
 }
 
+.tab {
+    display: inline-block;
+    margin-left: 40px;
+}
+
 @media screen and (min-width: 640px) {
     .card-body {
         padding: 2rem;
@@ -122,6 +127,11 @@ body {
     height: auto; /* zachowanie proporcji */
     width: auto; /* zachowanie proporcji */
     object-fit: contain; /* zachowuje proporcje bez rozci¹gania */
+}
+
+.logo_image {
+    width: 50px;
+    height: auto;
 }
 /*styles for job advert - start*/
 .job-box {
