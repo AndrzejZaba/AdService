@@ -6,28 +6,28 @@
 @model CourseAdvertBasicsDto
 
 @{
-    var imagePath = $"~/Content/Images/{Model.ImageUrl}";
+    var imagePath = $"~/Content/Images/{Model.ImageUrl}";    
 }
 
-    <div class="card h-100" style="height: 550px;">
-      @*<img src="https://mdbcdn.b-cdn.net/img/new/standard/city/044.webp" class="card-img-top" alt="Skyscrapers"/>*@
-      <a href="/courseadvert/@Model.WebsiteUrl">
+    <div class="card" @*style="min-height: 550px;"*@>
+      
           <div class="image-container">
-            <img src="@Url.Content(imagePath)" class="card-img-top" alt="Skyscrapers"/>
+              @*<a href="/courseadvert/@Model.WebsiteUrl">*@
+            <img src="@Url.Content(imagePath)" class="card-img-top" alt="CourseAdvertImage"/>
+                @*</a>*@
           </div>
           <div class="card-body">
             <h5 class="card-title">@Model.Title</h5>
-            <p>
+            <p class="card-text">
                 Price: <strong>@Model.CoursePrice$</strong>
             </p>
             <p class="card-text">
-              @Model.Description.TakeFirstNChar(100)
+              @Model.Description.ExtractTextFromHtml().TakeFirstNChar(100)
             </p>
-        
+            <a href="/courseadvert/@Model.WebsiteUrl" class="stretched-link"></a>
           </div>
-          <div class="card-footer">
+          <div class="card-footer ">
             <small class="text-muted">Posted: @Model.StartDate</small>
           </div>
-      </a>
     </div>
   
