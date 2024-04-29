@@ -30,7 +30,7 @@ public class EditUserCommandHandler : IRequestHandler<EditUserCommand>
             request.NipNumber = null;
             request.CompanyName = null;
             request.LogoFile = null;
-            request.LogoUrl = null;
+            request.LogoUrl = "logo_default.png";
         }
 
         if (request.LogoFile != null) 

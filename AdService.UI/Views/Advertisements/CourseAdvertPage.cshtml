@@ -47,7 +47,7 @@
         
             <div class="col-lg-4">
 
-                <div class="card mb-4 card-primary card-border-top" style="padding: 18px;">
+                <div class="card mb-4 card-primary" style="padding: 18px;">
 
                     <h5>Advertisement from:</h5>
 
@@ -66,10 +66,10 @@
                     {
                         <div class="row align-items-center">
                             <div class="col-auto">
-                                <img src="default.png" class="logo-image" alt="Logo Firmy" >
+                                <img src="@Url.Content(logoPath)" alt="Logo Firmy" style="width: 50px; height: auto;">
                             </div>
                             <div class="col-auto">
-                                <span class="nazwa-firmy">Nazwa Firmy</span>
+                                <span class="nazwa-firmy">@Model.User.FirstName @Model.User.LastName</span>
                             </div>
                         </div>
                     }
