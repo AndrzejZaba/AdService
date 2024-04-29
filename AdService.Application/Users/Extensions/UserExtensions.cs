@@ -48,7 +48,7 @@ public static class UserExtensions
             LastName = user.LastName,
             PhoneNumber = user.PhoneNumber,
             NipNumber = user.Client?.NipNumber,
-            IsBusinessAccount = user.Client?.IsBusinessAccount ?? true,
+            IsBusinessAccount = user.Client?.IsBusinessAccount ?? false,
             CompanyName = user.Client?.CompanyName
         };
     }

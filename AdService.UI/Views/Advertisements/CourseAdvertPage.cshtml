@@ -4,8 +4,16 @@
 @model CourseAdvertPageVm
 
 @{
-    var imagePath = $"~/Content/Images/{Model.CourseAdvert.ImageUrl}";    
-    var logoPath = $"~/Content/Images/Logos/{Model.User.CompanyLogo}";    
+    var imagePath = $"~/Content/Images/{Model.CourseAdvert.ImageUrl}";
+    var logoPath = $"";
+    if (Model.User.CompanyLogo == null)
+    {
+        logoPath = $"~/Content/Images/Logos/logo_default.png";
+    }
+    else
+    {
+        logoPath = $"~/Content/Images/Logos/{Model.User.CompanyLogo}";    
+    }
 }
 
 <div>

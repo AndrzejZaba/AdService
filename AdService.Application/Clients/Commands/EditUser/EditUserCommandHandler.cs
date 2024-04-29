@@ -25,13 +25,13 @@ public class EditUserCommandHandler : IRequestHandler<EditUserCommand>
     }
     public async Task<Unit> Handle(EditUserCommand request, CancellationToken cancellationToken)
     {
-        if (!request.IsBusinessAccount)
-        {
-            request.NipNumber = null;
-            request.CompanyName = null;
-            request.LogoFile = null;
-            request.LogoUrl = "logo_default.png";
-        }
+        //if (!request.IsBusinessAccount)
+        //{
+        //    request.NipNumber = null;
+        //    request.CompanyName = null;
+        //    request.LogoFile = null;
+        //    request.LogoUrl = "logo_default.png";
+        //}
 
         if (request.LogoFile != null) 
         {
