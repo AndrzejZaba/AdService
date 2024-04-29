@@ -1,5 +1,7 @@
-﻿@inject IConfiguration configuration
+﻿@using AdService.Application.Advertisements.CourseAdvertisements.Queries.GetSearchCourseAdverts;
+@inject IConfiguration configuration
  
+@model SearchCourseAdvertVm
 @{
     var templateKey = configuration.GetSection("TemplateKey").Value;
     //Layout = $"/Views/{templateKey}/Shared/_LayoutMain.cshtml";
@@ -7,6 +9,31 @@
 }
 
 <div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+    <h1 class="display-4">Search for courses!</h1>
+    <div class="container">
+        
+            @using (Html.BeginForm("Profile", "Client", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                {
+                    <div class="row g-3">
+                        @Html.AntiForgeryToken()
+        
+                        <!-- Form Group (username)-->
+                        <div class="col-auto">
+                            @*<label class="small mb-1" for="inputUsername">Email</label>*@
+                    
+                            @Html.TextBoxFor(x => x.SearchQuery.SearchText, new { @class = "form-control", @readonly = "readonly"})
+                        </div>
+
+                        <div class="col-auto">
+                            <div class="select2-blue">
+                                @Html.DropDownList("SearchQuery.CategoryId", @Model.AvailableCategories.Select(
+                                    x => new SelectListItem(x.Name, x.Id.ToString())), null, htmlAttributes: 
+                                    new { @class="form-control select2-CategoryId", style="width: 100%;"})
+
+                            </div>
+                        </div>
+                    </div>
+            }
+        
+    </div>
 </div>

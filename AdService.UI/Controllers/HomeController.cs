@@ -1,4 +1,6 @@
-﻿using AdService.UI.Models;
+﻿using AdService.Application.Advertisements.CourseAdvertisements.Queries.GetSearchCourseAdverts;
+using AdService.Application.Advertisements.CourseAdvertisements.Queries.GetSearchIndex;
+using AdService.UI.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 
@@ -12,11 +14,11 @@ namespace AdService.UI.Controllers
         {
             _logger = logger;
         }
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
             //await Mediator.Send(new )
 
-            return View();
+            return View(await Mediator.Send(new GetSearchIndexQuery()));
         }
 
         public IActionResult Privacy()
