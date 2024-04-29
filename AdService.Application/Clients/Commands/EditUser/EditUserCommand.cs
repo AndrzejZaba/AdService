@@ -27,15 +27,15 @@ public class EditUserCommand : IRequest
     public string PhoneNumber { get; set; }
 
     //[Required(ErrorMessage = "Field 'Is private account' is required.")]
-    [DisplayName("Is private account")]
-    public bool IsPrivateAccount { get; set; }
+    [DisplayName("Is it business account?")]
+    public bool IsBusinessAccount { get; set; }
 
     //[Required(ErrorMessage = "Field 'Nip number' is required.")]
     [DisplayName("Nip number")]
     public string NipNumber { get; set; }
 
     [DisplayName("Company Name")]
-    public string ComapnyName { get; set; }
+    public string CompanyName { get; set; }
 
     [DisplayName("Upload your company logo.")]
     public IFormFile LogoFile { get; set; }

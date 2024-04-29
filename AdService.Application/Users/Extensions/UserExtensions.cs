@@ -26,7 +26,7 @@ public static class UserExtensions
             LastName = user.LastName,
             PhoneNumber = user.PhoneNumber,
             NipNumber = user.Client?.NipNumber,
-            IsPrivateAccount = user.Client?.IsPrivateAccount ?? true
+            IsBusinessAccount = user.Client?.IsBusinessAccount ?? true
         };
     }
     
@@ -48,7 +48,8 @@ public static class UserExtensions
             LastName = user.LastName,
             PhoneNumber = user.PhoneNumber,
             NipNumber = user.Client?.NipNumber,
-            IsPrivateAccount = user.Client?.IsPrivateAccount ?? true
+            IsBusinessAccount = user.Client?.IsBusinessAccount ?? true,
+            CompanyName = user.Client?.CompanyName
         };
     }
 
@@ -64,7 +65,7 @@ public static class UserExtensions
             FirstName = user.FirstName,
             LastName = user.LastName,
             NipNumber = user.Client?.NipNumber,
-            IsPrivateAccount = user.Client?.IsPrivateAccount ?? true,
+            IsBusinessAccount = user.Client?.IsBusinessAccount ?? true,
             CompanyName = user.Client?.CompanyName,
             CompanyLogo = user.Client?.CompanyLogo
         };

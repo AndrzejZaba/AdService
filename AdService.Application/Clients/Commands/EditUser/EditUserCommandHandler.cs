@@ -10,29 +10,33 @@ public class EditUserCommandHandler : IRequestHandler<EditUserCommand>
     private readonly IApplicationDbContext _context;
     private readonly IFileImageManagerService _fileImageManagerService;
     private readonly IFileImageNameService _fileImageNameService;
+    private readonly IDateTimeService _dateTimeService;
 
     public EditUserCommandHandler(
         IApplicationDbContext context,
         IFileImageManagerService fileImageManagerService,
-        IFileImageNameService fileImageNameService)
+        IFileImageNameService fileImageNameService,
+        IDateTimeService dateTimeService)
     {
         _context = context;
         _fileImageManagerService = fileImageManagerService;
         _fileImageNameService = fileImageNameService;
+        _dateTimeService = dateTimeService;
     }
     public async Task<Unit> Handle(EditUserCommand request, CancellationToken cancellationToken)
     {
-        if (request.IsPrivateAccount)
+        if (!request.IsBusinessAccount)
         {
             request.NipNumber = null;
-            request.ComapnyName = null;
+            request.CompanyName = null;
             request.LogoFile = null;
             request.LogoUrl = null;
         }
 
         if (request.LogoFile != null) 
         {
-            request.LogoFile = _file
+            request.LogoUrl = _fileImageNameService.GetFileName(request.LogoFile.FileName, request.CompanyName, _dateTimeService.Now);
+            await _fileImageManagerService.UploadLogoAsync(request.LogoFile, request.LogoUrl);
         }
 
         var user = await _context.Users
@@ -47,10 +51,11 @@ public class EditUserCommandHandler : IRequestHandler<EditUserCommand>
         if (user.Client == null)
             user.Client = new Client();
 
-        user.Client.IsPrivateAccount = request.IsPrivateAccount;
+        user.Client.IsBusinessAccount = request.IsBusinessAccount;
         user.Client.NipNumber = request.NipNumber;
         user.Client.UserId = request.Id;
-        user.Client.CompanyName = request.ComapnyName;
+        user.Client.CompanyName = request.CompanyName;
+        user.Client.CompanyLogo = request.LogoUrl;
 
         if (user.Address == null)
             user.Address = new Address();

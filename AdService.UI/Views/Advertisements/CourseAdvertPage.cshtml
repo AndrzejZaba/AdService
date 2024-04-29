@@ -16,7 +16,7 @@
 
             <div class="col-lg-8">
 
-                <div class="card mb-4 card-primary card-border-top" style="padding: 18px;">
+                <div class="card mb-4 card-primary" style="padding: 18px;">
                 
                     @if (Model.CourseAdvert.ImageUrl != "course_default.jpg")
                     {
@@ -51,14 +51,14 @@
 
                     <h5>Advertisement from:</h5>
 
-                    @if (Model.User.IsPrivateAccount)
+                    @if (Model.User.IsBusinessAccount)
                     {
                         <div class="row align-items-center">
                             <div class="col-auto">
-                                <img src="https://media.licdn.com/dms/image/C510BAQGDMGLyhRKDxQ/company-logo_100_100/0/1631322207066?e=1722470400&v=beta&t=UDoLYC2agGKgznELpbQEzQt9_PUtooBBQbZ6qkMOfig" alt="Logo Firmy" style="width: 50px; height: auto;">
+                                <img src="@Url.Content(logoPath)" alt="Logo Firmy" style="width: 50px; height: auto;">
                             </div>
                             <div class="col-auto">
-                                <span class="nazwa-firmy">Nazwa Firmy</span>
+                                <span class="nazwa-firmy">@Model.User.CompanyName</span>
                             </div>
                         </div>
                     }
@@ -66,7 +66,7 @@
                     {
                         <div class="row align-items-center">
                             <div class="col-auto">
-                                <img src="logo_firmy.png" class="logo-image" alt="Logo Firmy" >
+                                <img src="default.png" class="logo-image" alt="Logo Firmy" >
                             </div>
                             <div class="col-auto">
                                 <span class="nazwa-firmy">Nazwa Firmy</span>

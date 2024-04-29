@@ -26,7 +26,7 @@
                 <div class="card mb-4 card-primary card-border-top">
                     <div class="card-header">Account Details</div>
                         <div class="card-body">
-                            @using (Html.BeginForm("Profile", "Client"))
+                            @using (Html.BeginForm("Profile", "Client", FormMethod.Post, new { enctype = "multipart/form-data" }))
                             {
 
                                 @Html.AntiForgeryToken()
@@ -65,21 +65,21 @@
                                 <hr />
 
                                 <div class="form-check mb-3">
-                                    @Html.CheckBoxFor(x => x.IsPrivateAccount, new{ @class = "form-check-input"})
-                                    @Html.LabelFor(x => x.IsPrivateAccount, new{ @class = "form-check-label font-weight-bold"})
+                                    @Html.CheckBoxFor(x => x.IsBusinessAccount, new{ @class = "form-check-input", @value = @Model.IsBusinessAccount})
+                                    @Html.LabelFor(x => x.IsBusinessAccount, new{ @class = "form-check-label font-weight-bold"})
                                 </div>
                                 
                                 <!-- Form Row-->
                                 <div class="row gx-3 mb-3">
                                     <div class="form-group" id="divCompanyName" style="display: none;">
-                                        @Html.LabelFor(x => x.ComapnyName)
-                                        @Html.TextBoxFor(x => x.ComapnyName, new { @class = "form-control", placeholder="Enter your company name" })
-                                        @Html.ValidationMessageFor(x => x.ComapnyName)
+                                        @Html.LabelFor(x => x.CompanyName)
+                                        @Html.TextBoxFor(x => x.CompanyName, new { @class = "form-control", placeholder="Enter your company name", @value = @Model.CompanyName })
+                                        @Html.ValidationMessageFor(x => x.CompanyName)
                                     </div>
                                 
                                     <div class="form-group" id="divNipNumber" style="display: none;">
                                         @Html.LabelFor(x => x.NipNumber)
-                                        @Html.TextBoxFor(x => x.NipNumber, new { @class = "form-control", placeholder="Enter NIP " })
+                                        @Html.TextBoxFor(x => x.NipNumber, new { @class = "form-control", placeholder="Enter NIP ", @value = @Model.NipNumber})
                                         @Html.ValidationMessageFor(x => x.NipNumber)
                                     </div>
                                 </div>
@@ -93,7 +93,7 @@
                                 
                                     <hr />
 
-                                <!-- Form Group (email address)-->
+                                <!-- Form Group -->
                                 <div class="mb-3">
                                         @Html.LabelFor(x => x.Country)
                                         @Html.TextBoxFor(x => x.Country, new { @class = "form-control", @placeholder = "Enter your country", @value = @Model.Country})   
@@ -102,13 +102,13 @@
 
                                 <!-- Form Row -->
                                 <div class="row gx-3 mb-3">
-                                    <!-- Form Group (organization name)-->
+                                    <!-- Form Group -->
                                     <div class="col-md-6">
                                         @Html.LabelFor(x => x.City)
                                         @Html.TextBoxFor(x => x.City, new { @class = "form-control", @placeholder = "Enter your phone number", @value = @Model.City})   
                                         @Html.ValidationMessageFor(x => x.City)
                                     </div>
-                                    <!-- Form Group (location)-->
+                                    <!-- Form Group -->
                                     <div class="col-md-6">
                                         @Html.LabelFor(x => x.ZipCode)
                                         @Html.TextBoxFor(x => x.ZipCode, new { @class = "form-control", @placeholder = "Enter your zip code", @value = @Model.ZipCode, id = "ZipCode"})
@@ -118,13 +118,13 @@
                                 
                                 <!-- Form Row-->
                                 <div class="row gx-3 mb-3">
-                                    <!-- Form Group (phone number)-->
+                                    <!-- Form Group -->
                                     <div class="col-md-6">
                                         @Html.LabelFor(x => x.Street)
                                         @Html.TextBoxFor(x => x.Street, new { @class = "form-control", @placeholder = "Enter your street", @value = @Model.Street})  
                                         @Html.ValidationMessageFor(x => x.Street)
                                     </div>
-                                    <!-- Form Group (birthday)-->
+                                    <!-- Form Group -->
                                     <div class="col-md-6">
                                         @Html.LabelFor(x => x.StreetNumber)
                                         @Html.TextBoxFor(x => x.StreetNumber, new { @class = "form-control", @placeholder = "Enter your street number", @value = @Model.StreetNumber})  
@@ -154,7 +154,7 @@
 
         $(document).ready(function() {
 
-            if ('@Model.IsPrivateAccount.ToString().ToUpper()' == 'FALSE'){
+            if ('@Model.IsBusinessAccount.ToString().ToUpper()' == 'TRUE'){
                 $("#divNipNumber").show();
                 $("#divCompanyName").show();
                 $("#divLogo").show();
@@ -164,18 +164,19 @@
 
         });
 
-        $('#IsPrivateAccount').click(function() {
-            if($('#IsPrivateAccount').is(':checked')) {
-                $("#divNipNumber").hide();
-                $("#divCompanyName").hide();
-                $("#divLogo").hide();
-            }
-            else{
+        $('#IsBusinessAccount').click(function() {
+            if($('#IsBusinessAccount').is(':checked')) {
                 $("#divNipNumber").show();
                 $("#divCompanyName").show();
                 $("#divLogo").show();
             }
+            else{
+                $("#divNipNumber").hide();
+                $("#divCompanyName").hide();
+                $("#divLogo").hide();
+            }
         });
+
 
     </script>
 

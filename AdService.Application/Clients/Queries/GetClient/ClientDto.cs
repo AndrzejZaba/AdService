@@ -11,7 +11,7 @@ public class ClientDto
     public string PhoneNumber { get; set; }
     public string Password { get; set; }
     public string ConfirmPassword { get; set; }
-    public bool IsPrivateAccount { get; set; }
+    public bool IsBusinessAccount { get; set; }
     public string NipNumber { get; set; }
 
     public string Country { get; set; }

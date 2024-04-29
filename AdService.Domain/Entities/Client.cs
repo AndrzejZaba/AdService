@@ -3,7 +3,7 @@
 public class Client
 {
     public int Id { get; set; }
-    public bool IsPrivateAccount { get; set; }
+    public bool IsBusinessAccount { get; set; }
     public string NipNumber { get; set; }
     public string CompanyName { get; set; }
     public string CompanyLogo { get; set; }

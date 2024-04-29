@@ -30,7 +30,7 @@ public class AddCourseAdvertCommandHandler : IRequestHandler<AddCourseAdvertComm
         if (request.ImageFile != null)
         {
             request.ImageUrl = _fileImageNameService.GetFileName(request.ImageFile.FileName, sessionId, _dateTimeService.Now);
-            await _fileImageManagerService.UploadImage(request.ImageFile, request.ImageUrl);
+            await _fileImageManagerService.UploadImageAsync(request.ImageFile, request.ImageUrl);
         }
 
         await AddToDatabase(request, sessionId, cancellationToken);

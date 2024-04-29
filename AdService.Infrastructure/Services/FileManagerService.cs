@@ -12,17 +12,30 @@ public class FileImageManagerService : IFileImageManagerService
     {
         _webHostEnvironment = webHostEnvironment;
     }
-    public async Task UploadImage(IFormFile file, string fileName)
-    {
-        var folderRoot = Path.Combine(_webHostEnvironment.WebRootPath, "Content", "Images");
 
-        if (!Directory.Exists(folderRoot))
-            Directory.CreateDirectory(folderRoot);
+    public async Task UploadImageAsync(IFormFile file, string fileName)
+    {
+        var folderImages = Path.Combine(_webHostEnvironment.WebRootPath, "Content", "Images");
+
+        await UploadAsync(file, folderImages, fileName);
+    }
+
+    public async Task UploadLogoAsync(IFormFile file, string fileName)
+    {
+        var folderLogos = Path.Combine(_webHostEnvironment.WebRootPath, "Content", "Images", "Logos");
+
+        await UploadAsync(file, folderLogos, fileName);
+    }
+
+    public async Task UploadAsync(IFormFile file, string path, string fileName)
+    {
+        if (!Directory.Exists(path))
+            Directory.CreateDirectory(path);
 
         if (file == null)
             return;
 
-        var filePath = Path.Combine(folderRoot, fileName);
+        var filePath = Path.Combine(path, fileName);
 
         using (var stream = new FileStream(filePath, FileMode.Create))
         {
