@@ -2,6 +2,7 @@
 using AdService.Application.Advertisements.CourseAdvertisements.Queries;
 using AdService.Application.Advertisements.CourseAdvertisements.Queries.GetAddCourseAdvert;
 using AdService.Application.Advertisements.CourseAdvertisements.Queries.GetCourseAdvertPage;
+using AdService.Application.Advertisements.CourseAdvertisements.Queries.GetSearchCourseAdverts;
 using AdService.Application.Advertisements.CourseAdvertisements.Queries.GetUsersCourseAdverts;
 using AdService.Application.Common.Interfaces;
 using Microsoft.AspNetCore.Mvc;
@@ -16,10 +17,12 @@ namespace AdService.UI.Controllers
         {
             _dateTimeService = dateTimeService;
         }
+        
         public IActionResult MyJobAdvertisements()
         {
             return View();
         } 
+        
         public async Task<IActionResult> UserCourseAdverts(int page = 1)
         {
             return View(await Mediator.Send(new GetUsersCourseAdvertsQuery
@@ -29,6 +32,19 @@ namespace AdService.UI.Controllers
                 PageNumber = page
             }));
         }
+        
+        public async Task<IActionResult> SearchedCoursesList(string text, int categoryId, int page = 1)
+        {
+            var result = new GetSearchCourseAdvertsQuery
+            {
+                SearchText = text,
+                CategoryId = categoryId,
+                PageNumber = page,
+                PageSize = 9
+            };
+            return View(await Mediator.Send(result));
+        }
+        
         public async Task<IActionResult> AddCourseAdvertisement()
         {
             return View(await Mediator.Send(new GetAddCourseAdvertQuery()));

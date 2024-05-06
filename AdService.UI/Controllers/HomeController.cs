@@ -21,6 +21,25 @@ namespace AdService.UI.Controllers
             return View(await Mediator.Send(new GetSearchIndexQuery()));
         }
 
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Index(SearchCourseAdvertVm vm, int page = 1)
+        {
+            //await Mediator.Send(new )
+            //var result = new GetSearchCourseAdvertsQuery
+            //{
+            //    SearchText = vm.SearchQuery.SearchText,
+            //    CategoryId = vm.SearchQuery.CategoryId,
+            //    PageNumber = page,
+            //    PageSize = 9
+            //};
+
+            //return View(await Mediator.Send(new GetSearchIndexQuery()));
+            return RedirectToAction("SearchedCoursesList", "Advertisements", new { text = vm.SearchQuery.SearchText, categoryId = vm.SearchQuery.CategoryId});
+        }
+
+        
+
         public IActionResult Privacy()
         {
             return View();

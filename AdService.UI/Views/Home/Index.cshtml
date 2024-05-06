@@ -16,7 +16,7 @@
     <h1 class="display-4">Search for courses!</h1>
     <div class="container ">
         
-            @using (Html.BeginForm("Profile", "Client", FormMethod.Post, new { enctype = "multipart/form-data" }))
+            @using (Html.BeginForm("Index", "Home"))
                 {
                     @Html.AntiForgeryToken()
 
@@ -28,7 +28,7 @@
 
                                 <div class="col-lg-3 col-md-3 col-sm-12 p-0">
                                     <div class="">
-                                        @Html.TextBoxFor(x => x.SearchQuery.SearchText, new { @class = "form-control search-slt", })
+                                        @Html.TextBoxFor(x => x.SearchQuery.SearchText, new { @class = "form-control search-slt", @placeholder = "Search for course's subject..."})
                                     </div>
                                 </div>
 
@@ -37,7 +37,7 @@
                                         <div class="select2-blue">
                                             @Html.DropDownList("SearchQuery.CategoryId", @Model.AvailableCategories.Select(
                                                 x => new SelectListItem(x.Name, x.Id.ToString())), null, htmlAttributes: 
-                                                new { @class="form-control select2-CategoryId search-slt", style="width: 100%;"})
+                                                new { @class="form-control select2-CategoryId search-slt", style="width: 100%; padding-left: 10px;"})
 
                                         </div>
 

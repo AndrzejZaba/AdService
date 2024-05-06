@@ -1,0 +1,35 @@
+﻿@using AdService.Application.Advertisements.CourseAdvertisements.Queries.GetUsersCourseAdverts;
+@using AdService.Application.Common.Models;
+
+@model PaginatedList<CourseAdvertBasicsDto>
+
+
+    <div class="container">
+        
+<h3>Searched Adverts</h3>
+
+
+        <div class="row row-cols-1 row-cols-lg-3 row-cols-md-2 g-4">
+            @foreach (var item in Model.Items)
+            {
+                <div class="card-group">
+                    
+                    
+                        <partial name="_CourseAdvertisement" model="item" />
+                    
+                </div>
+            }
+            
+        </div>
+        <div class="mt-3">
+            <ul class="pagination">  
+                @for (int i = 1; i <= Model.TotalPages; i++)  
+                {  
+                    <li class="@(i == Model.PageIndex ? "page-item active" : "page-item")">  
+                        <a class="page-link" href="@Url.Action("UserCourseAdverts", new { page = i })">@i</a>  
+                    </li>  
+                }   
+            </ul>  
+        </div>
+
+    </div>

@@ -28,10 +28,6 @@ namespace AdService.UI.Controllers
             return RedirectToAction("Profile");
         }
 
-        public IActionResult EditProfile()
-        {
-            return View();
-            //return View(await Mediator.Send(new GetEditClientQuery { UserId = UserId }));
-        }
+
     }
 }
