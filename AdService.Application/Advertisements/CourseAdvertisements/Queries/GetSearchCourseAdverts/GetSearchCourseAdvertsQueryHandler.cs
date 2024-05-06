@@ -22,8 +22,12 @@ public class GetSearchCourseAdvertsQueryHandler : IRequestHandler<GetSearchCours
         var searchedCourseAdverts = _context
             .CourseAdverts
             //.Where(x => x.Title.Contains(request.SearchText) && x.CategoryId == request.CategoryId)
-            .Where(x => x.CategoryId == request.CategoryId)
-            .AsNoTracking();
+            .Where(x => x.CategoryId == request.CategoryId);
+
+        if (string.IsNullOrWhiteSpace(request.SearchText))
+            searchedCourseAdverts.Where(x => x.Title.Contains(request.SearchText));
+        
+        searchedCourseAdverts.AsNoTracking();
 
         var paginatedList = await searchedCourseAdverts
             .Select(x => x.ToBasicsDto())

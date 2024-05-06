@@ -6,5 +6,4 @@ namespace AdService.Application.Advertisements.CourseAdvertisements.Queries.GetC
 public class GetCourseAdvertPageQuery : IRequest<CourseAdvertPageVm>
 {
     public string Url { get; set; }
-    public string UserId { get; set; }
 }

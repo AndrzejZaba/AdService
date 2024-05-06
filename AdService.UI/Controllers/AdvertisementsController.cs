@@ -83,8 +83,7 @@ namespace AdService.UI.Controllers
         {
             var page = await Mediator.Send(new GetCourseAdvertPageQuery 
             { 
-                Url = courseAdvertPageUrl, 
-                UserId = UserId 
+                Url = courseAdvertPageUrl
             });
 
             if (page == null)

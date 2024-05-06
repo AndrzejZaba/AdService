@@ -16,18 +16,18 @@ public class GetCourseAdvertPageQueryHandler : IRequestHandler<GetCourseAdvertPa
     }
     public async Task<CourseAdvertPageVm> Handle(GetCourseAdvertPageQuery request, CancellationToken cancellationToken)
     {
-        var user = await _context
-            .Users
-            .AsNoTracking()
-            .Include(x => x.Client)
-            .FirstOrDefaultAsync(x => x.Id == request.UserId);
 
         var courseAdvert = await _context
             .CourseAdverts
             .AsNoTracking()
             .FirstOrDefaultAsync(x => x.WebsiteUrl == request.Url);
-
         
+        var user = await _context
+            .Users
+            .AsNoTracking()
+            .Include(x => x.Client)
+            .FirstOrDefaultAsync(x => x.Id == courseAdvert.UserId);
+
 
         var pageVm = new CourseAdvertPageVm
         {
