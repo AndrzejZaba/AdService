@@ -26,7 +26,7 @@
                 @for (int i = 1; i <= Model.TotalPages; i++)  
                 {  
                     <li class="@(i == Model.PageIndex ? "page-item active" : "page-item")">  
-                        <a class="page-link" href="@Url.Action("UserCourseAdverts", new { page = i })">@i</a>  
+                        <a class="page-link" href="@Url.Action("SearchedCoursesList", new { page = i })">@i</a>  
                     </li>  
                 }   
             </ul>  
