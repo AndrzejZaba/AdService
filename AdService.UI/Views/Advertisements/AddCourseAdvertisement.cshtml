@@ -136,7 +136,11 @@
                                 <!-- Form Group - Price -->
                                 <div class="mb-3">
                                     @Html.LabelFor(x => x.CourseAdvert.Price)
+                                    <div class=" input-group  col-md-3">
+                                    <span class="input-group-text">$</span>
                                     @Html.TextBoxFor(x => x.CourseAdvert.Price, new { @id = "CalculatedPrice", @class = "form-control", @readonly = "readonly"})
+                                    <span class="input-group-text">.00</span>
+                                    </div>
                                     @Html.ValidationMessageFor(x => x.CourseAdvert.Price)
                                 </div>
 
