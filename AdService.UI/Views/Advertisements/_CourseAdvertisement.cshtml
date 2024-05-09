@@ -1,31 +1,48 @@
 ﻿@using AdService.Application.Advertisements.CourseAdvertisements.Queries.GetUsersCourseAdverts;
 @using AdService.Application.Common.Extensions;
+@using System.Security.Claims;
 
 @addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
 
 @model CourseAdvertBasicsDto
 
 @{
+    var isProfileView = ViewData["IsProfileView"] as bool? ?? false;
     var imagePath = $"~/Content/Images/{Model.ImageUrl}";    
 }
+            
 
-    <div class="card" @*style="min-height: 550px;"*@>
-      
-          <div class="image-container">
-            <img src="@Url.Content(imagePath)" class="card-img-top" alt="CourseAdvertImage"/>
-          </div>
-          <div class="card-body">
-            <h5 class="card-title">@Model.Title</h5>
-            <p class="card-text">
-                Price: <strong>@Model.CoursePrice$</strong>
-            </p>
-            <p class="card-text">
-              @Model.Description.ExtractTextFromHtml().TakeFirstNChar(100)
-            </p>
-            <a href="/courseadvert/@Model.WebsiteUrl" class="stretched-link"></a>
-          </div>
-          <div class="card-footer ">
-            <small class="text-muted">Posted: @Model.StartDate.ToString("dd/MM/yyyy")</small>
-          </div>
+<div class="card" onclick="handleCardClick('/courseadvert/@Model.WebsiteUrl')">
+    <div class="image-container">
+        <img src="@Url.Content(imagePath)" class="card-img-top" alt="CourseAdvertImage"/>
     </div>
+    <div class="card-body">
+        <h5 class="card-title">@Model.Title</h5>
+        <p class="card-text">
+            Price: <strong>@Model.CoursePrice$</strong>
+        </p>
+        <p class="card-text">
+            @Model.Description.ExtractTextFromHtml().TakeFirstNChar(100)
+        </p>
+        @*<a href="/courseadvert/@Model.WebsiteUrl" class="stretched-link"></a>*@
+    </div>
+    <div class="card-footer row">
+        <small class="text-muted">Posted: @Model.StartDate.ToString("dd/MM/yyyy")</small>
+        @if (isProfileView && User.Identity.IsAuthenticated && Model.OwnerId == User.FindFirstValue(ClaimTypes.NameIdentifier))
+        {
+            <a href="/Advertisements/EditCourseAdvert" class="btn btn-primary btn-sm" role="button" onclick="event.stopPropagation();">Edit</a>
+        }
+    </div>
+</div>
+
   
+@section Scripts
+{
+<script>
+    function handleCardClick(url) {
+    window.location.href = url;
+}
+
+
+</script>
+}

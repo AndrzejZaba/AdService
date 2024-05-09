@@ -69,7 +69,7 @@
                                     <div class="col-md-6">
                                         @Html.LabelFor(x => x.CourseAdvert.StartDate)
                                         <div class="input-group date" id="dtpStartDate" data-target-input="nearest">
-                                            <input asp-for="CourseAdvert.StartDate" type="text" class="form-control datetimepicker-input" data-target="#dtpStartDate" value="@Model.CourseAdvert.StartDate.ToString("dd-MM-yyyy")" />
+                                            <input asp-for="CourseAdvert.StartDate" type="text" class="form-control datetimepicker-input disabled" data-target="#dtpStartDate" value="@Model.CourseAdvert.StartDate.ToString("dd-MM-yyyy")" />
                                             <div class="input-group-append" data-target="#dtpStartDate" data-toggle="datetimepicker">
                                                 <div class="input-group-text calendar">
                                                     <i class="fa fa-calendar-days"></i>
@@ -137,14 +137,10 @@
                                     @Html.ValidationMessageFor(x => x.CourseAdvert.Price)
                                 </div>
 
-                                
-                                @*<div>
-                                    <label for="price">Price: $</label>
-                                    <span id="price">0</span>
-                                </div>*@
+
 
                                 <!-- Save changes button-->
-                                <button class="btn btn-primary" type="submit">Pay for advertisement</button>
+                                <button class="btn btn-primary" type="submit">Update advertisement</button>
                             }
                 
                         

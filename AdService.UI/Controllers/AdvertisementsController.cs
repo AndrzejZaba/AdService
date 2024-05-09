@@ -2,6 +2,7 @@
 using AdService.Application.Advertisements.CourseAdvertisements.Queries;
 using AdService.Application.Advertisements.CourseAdvertisements.Queries.GetAddCourseAdvert;
 using AdService.Application.Advertisements.CourseAdvertisements.Queries.GetCourseAdvertPage;
+using AdService.Application.Advertisements.CourseAdvertisements.Queries.GetEditCourseAdvert;
 using AdService.Application.Advertisements.CourseAdvertisements.Queries.GetSearchCourseAdverts;
 using AdService.Application.Advertisements.CourseAdvertisements.Queries.GetUsersCourseAdverts;
 using AdService.Application.Common.Interfaces;
@@ -90,6 +91,11 @@ namespace AdService.UI.Controllers
                 return NotFound();
 
             return View(page);
+        }
+
+        public async Task<IActionResult> EditCourseAdvert(string advertId)
+        {
+            return View(await Mediator.Send(new GetEditCourseAdvertQuery { AdvertId = advertId }));
         }
     }
 }

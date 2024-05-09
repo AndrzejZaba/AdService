@@ -10,5 +10,7 @@
         public DateTime StartDate { get; set; }
 
         public string WebsiteUrl { get; set; }
+
+        public string OwnerId { get; set; }
     }
 }
