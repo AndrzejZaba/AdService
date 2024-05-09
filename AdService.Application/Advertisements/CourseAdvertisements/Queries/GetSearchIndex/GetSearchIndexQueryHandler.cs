@@ -6,16 +6,16 @@ using Microsoft.EntityFrameworkCore;
 
 namespace AdService.Application.Advertisements.CourseAdvertisements.Queries.GetSearchIndex;
 
-public class GetSearchIndexQueryHandler : IRequestHandler<GetSearchIndexQuery, SearchCourseAdvertVm>
+public class GetSearchIndexQueryHandler : IRequestHandler<GetSearchIndexQuery, SearchIndexVm>
 {
     private readonly IApplicationDbContext _context;
     public GetSearchIndexQueryHandler(IApplicationDbContext context)
     {
         _context = context;
     }
-    public async Task<SearchCourseAdvertVm> Handle(GetSearchIndexQuery request, CancellationToken cancellationToken)
+    public async Task<SearchIndexVm> Handle(GetSearchIndexQuery request, CancellationToken cancellationToken)
     {
-        var vm = new SearchCourseAdvertVm();
+        var vm = new SearchIndexVm();
 
         vm.SearchQuery = new GetSearchCourseAdvertsQuery { CategoryId = 1};
 

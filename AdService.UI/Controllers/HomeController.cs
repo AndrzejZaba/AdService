@@ -1,5 +1,6 @@
 ﻿using AdService.Application.Advertisements.CourseAdvertisements.Queries.GetSearchCourseAdverts;
 using AdService.Application.Advertisements.CourseAdvertisements.Queries.GetSearchIndex;
+using AdService.Domain.Entities;
 using AdService.UI.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
@@ -23,7 +24,7 @@ namespace AdService.UI.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Index(SearchCourseAdvertVm vm, int page = 1)
+        public IActionResult Index(SearchIndexVm vm)
         {
             //await Mediator.Send(new )
             //var result = new GetSearchCourseAdvertsQuery
@@ -35,7 +36,13 @@ namespace AdService.UI.Controllers
             //};
 
             //return View(await Mediator.Send(new GetSearchIndexQuery()));
-            return RedirectToAction("SearchedCoursesList", "Advertisements", new { text = vm.SearchQuery.SearchText, categoryId = vm.SearchQuery.CategoryId});
+
+            return RedirectToAction("SearchedCoursesList", "Advertisements", 
+                new { 
+                    searchedText = vm.SearchQuery.SearchText, 
+                    categoryId = vm.SearchQuery.CategoryId, 
+                    page = 1
+                });
         }
 
         

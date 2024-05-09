@@ -33,11 +33,11 @@ namespace AdService.UI.Controllers
             }));
         }
         
-        public async Task<IActionResult> SearchedCoursesList(string text, int categoryId, int page = 1)
+        public async Task<IActionResult> SearchedCoursesList(string searchedText, int categoryId, int page = 1)
         {
             var result = new GetSearchCourseAdvertsQuery
             {
-                SearchText = text,
+                SearchText = searchedText,
                 CategoryId = categoryId,
                 PageNumber = page,
                 PageSize = 9

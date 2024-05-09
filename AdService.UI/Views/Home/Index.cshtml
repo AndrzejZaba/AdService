@@ -1,7 +1,7 @@
-﻿@using AdService.Application.Advertisements.CourseAdvertisements.Queries.GetSearchCourseAdverts;
+﻿@using AdService.Application.Advertisements.CourseAdvertisements.Queries.GetSearchIndex;
 @inject IConfiguration configuration
- 
-@model SearchCourseAdvertVm
+
+@model SearchIndexVm
 @{
     var templateKey = configuration.GetSection("TemplateKey").Value;
     //Layout = $"/Views/{templateKey}/Shared/_LayoutMain.cshtml";

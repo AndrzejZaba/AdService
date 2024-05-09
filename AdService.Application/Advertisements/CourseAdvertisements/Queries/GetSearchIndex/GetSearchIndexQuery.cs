@@ -1,9 +1,8 @@
-﻿using AdService.Application.Advertisements.CourseAdvertisements.Queries.GetSearchCourseAdverts;
-using MediatR;
+﻿using MediatR;
 
 
 namespace AdService.Application.Advertisements.CourseAdvertisements.Queries.GetSearchIndex;
 
-public class GetSearchIndexQuery : IRequest<SearchCourseAdvertVm>
+public class GetSearchIndexQuery : IRequest<SearchIndexVm>
 {
 }
