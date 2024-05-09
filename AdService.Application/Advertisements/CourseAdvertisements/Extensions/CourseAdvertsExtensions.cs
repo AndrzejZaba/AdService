@@ -14,6 +14,7 @@ public static class CourseAdvertsExtensions
 
         return new CourseAdvertBasicsDto
         {
+            Id = courseAdvert.Id,
             Title = courseAdvert.Title,
             Description = courseAdvert.Description,
             ImageUrl = courseAdvert.CourseImage,

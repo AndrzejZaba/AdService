@@ -2,6 +2,7 @@
 {
     public class CourseAdvertBasicsDto
     {
+        public string Id { get; set; }
         public string Title { get; set; }
         public decimal CoursePrice { get; set; }
         public string Description { get; set; }

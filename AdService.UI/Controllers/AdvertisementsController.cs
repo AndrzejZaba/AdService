@@ -93,6 +93,8 @@ namespace AdService.UI.Controllers
             return View(page);
         }
 
+        [HttpGet]
+        [Route("Advertisements/EditCourseAdvert/{advertId}")]
         public async Task<IActionResult> EditCourseAdvert(string advertId)
         {
             return View(await Mediator.Send(new GetEditCourseAdvertQuery { AdvertId = advertId }));

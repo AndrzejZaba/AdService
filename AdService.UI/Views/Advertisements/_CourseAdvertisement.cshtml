@@ -10,39 +10,39 @@
     var isProfileView = ViewData["IsProfileView"] as bool? ?? false;
     var imagePath = $"~/Content/Images/{Model.ImageUrl}";    
 }
-            
 
-<div class="card" onclick="handleCardClick('/courseadvert/@Model.WebsiteUrl')">
+<style>
+    .card {
+    position: relative;
+}
+
+.card-link {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    z-index: 1; /* niższy niż przycisk edycji */
+}
+</style>
+
+    <div class="card">
+    <a href="/courseadvert/@Model.WebsiteUrl" class="card-link"></a>
     <div class="image-container">
-        <img src="@Url.Content(imagePath)" class="card-img-top" alt="CourseAdvertImage"/>
+            <img src="@Url.Content(imagePath)" class="card-img-top" alt="CourseAdvertImage"/>
     </div>
     <div class="card-body">
         <h5 class="card-title">@Model.Title</h5>
-        <p class="card-text">
-            Price: <strong>@Model.CoursePrice$</strong>
-        </p>
-        <p class="card-text">
-            @Model.Description.ExtractTextFromHtml().TakeFirstNChar(100)
-        </p>
-        @*<a href="/courseadvert/@Model.WebsiteUrl" class="stretched-link"></a>*@
+        <p class="card-text">Price: <strong>@Model.CoursePrice$</strong></p>
+        <p class="card-text">@Model.Description.ExtractTextFromHtml().TakeFirstNChar(100)</p>
     </div>
-    <div class="card-footer row">
+    <div class="card-footer">
         <small class="text-muted">Posted: @Model.StartDate.ToString("dd/MM/yyyy")</small>
         @if (isProfileView && User.Identity.IsAuthenticated && Model.OwnerId == User.FindFirstValue(ClaimTypes.NameIdentifier))
         {
-            <a href="/Advertisements/EditCourseAdvert" class="btn btn-primary btn-sm" role="button" onclick="event.stopPropagation();">Edit</a>
+            <a href="/Advertisements/EditCourseAdvert/@Model.Id" class="btn btn-primary btn-sm" style="position: relative; z-index: 2; margin-left: 20px;">Edit</a>
         }
     </div>
 </div>
-
   
-@section Scripts
-{
-<script>
-    function handleCardClick(url) {
-    window.location.href = url;
-}
 
-
-</script>
-}
