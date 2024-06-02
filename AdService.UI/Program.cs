@@ -23,6 +23,16 @@ namespace AdService.UI
 
             builder.Services.DefineViewLocation(builder.Configuration);
 
+
+            builder.Services.AddSession(options =>
+            {
+                // Ustawienia zabezpieczeñ sesji
+                options.Cookie.HttpOnly = true; // Zapobiega dostêpowi do ciasteczka z poziomu JavaScript
+                options.Cookie.IsEssential = true; // Oznacza ciasteczko jako niezbêdne, nawet jeœli sesja nie jest aktywna
+                options.IdleTimeout = TimeSpan.FromMinutes(30); // Czas wygaœniêcia sesji
+                options.Cookie.SameSite = SameSiteMode.Strict; // Zapobiega atakom CSRF
+            });
+
             // Add services to the container.
             builder.Services.AddControllersWithViews();
 
@@ -65,6 +75,9 @@ namespace AdService.UI
             app.UseRouting();
             app.UseAuthentication();;
             app.UseAuthorization();
+
+            // Dodanie obs³ugi sesji do potoku middleware'ów
+            app.UseSession();
 
             app.MapControllerRoute(
                 name: "default",

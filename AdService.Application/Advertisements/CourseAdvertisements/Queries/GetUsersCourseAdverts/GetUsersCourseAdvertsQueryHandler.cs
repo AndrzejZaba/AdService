@@ -22,8 +22,6 @@ public class GetUsersCourseAdvertsQueryHandler : IRequestHandler<GetUsersCourseA
             .Where(x => x.UserId == request.UserId)
             .AsNoTracking();
 
-        // właściwość SearchValue - do wyszukiwania np. po frazie
-
         var paginatedList = await courseAdverts
             .Select(x => x.ToBasicsDto())
             .PaginatedListAsync(request.PageNumber, request.PageSize);

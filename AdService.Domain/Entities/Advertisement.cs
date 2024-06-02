@@ -11,6 +11,4 @@ public abstract class Advertisement
     public DateTime EndDate { get; set; }
     public DateTime CreationDate { get; set; }
     public string WebsiteUrl { get; set; }
-
-
 }
