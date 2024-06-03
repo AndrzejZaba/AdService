@@ -5,6 +5,7 @@ using AdService.Application.Advertisements.CourseAdvertisements.Queries.GetCours
 using AdService.Application.Advertisements.CourseAdvertisements.Queries.GetEditCourseAdvert;
 using AdService.Application.Advertisements.CourseAdvertisements.Queries.GetSearchCourseAdverts;
 using AdService.Application.Advertisements.CourseAdvertisements.Queries.GetUsersCourseAdverts;
+using AdService.Application.Common.Extensions;
 using AdService.Application.Common.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
@@ -74,7 +75,10 @@ namespace AdService.UI.Controllers
 
             TempData["Success"] = "New course advert has beed added!";
 
-            return RedirectToAction("Checkout", "Payment");
+            return RedirectToAction("Checkout", "Payment", new { 
+                title = vm.CourseAdvert.Title, 
+                description = vm.CourseAdvert.Description.ExtractTextFromHtml().TakeFirstNChar(100)
+            });
 
             // Dodanie ogłoszenia bez płatności
             //return RedirectToAction("UserCourseAdverts");

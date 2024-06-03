@@ -28,14 +28,18 @@ namespace AdService.UI.Controllers
             return View("Login");
         }
 
-        public IActionResult CheckOut()
+        public IActionResult Success()
         {
-            var product = new CourseAdvert
-            {
-                Title = "Advert to pay for",
-                Description = "Description of advert to pay for"
-            };
+            return View();
+        }
 
+        public IActionResult Error()
+        {
+            return View();
+        }
+
+        public IActionResult CheckOut(string title, string description)
+        {
             var domain = "https://localhost:7036/";
 
             var options = new SessionCreateOptions
@@ -54,8 +58,8 @@ namespace AdService.UI.Controllers
                             UnitAmount = Convert.ToInt32(1) * 100,
                             ProductData = new SessionLineItemPriceDataProductDataOptions
                             {
-                                Name = product.Title,
-                                Description = product.Description
+                                Name = title,
+                                Description = description
                             }
                         },
                         Quantity = 1
@@ -65,7 +69,7 @@ namespace AdService.UI.Controllers
                 Mode = "payment",
                 CustomerEmail = "andzab00@gmail.com",
                 SuccessUrl = domain + $"Payment/OrderConfirmation",
-                CancelUrl = domain + $"Payment/Login"
+                CancelUrl = domain + $"Payment/Error"
             };
 
             var service = new SessionService();
