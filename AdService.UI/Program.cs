@@ -4,7 +4,7 @@ using AdService.Infrastructure;
 using AdService.UI.Extensions;
 using AdService.UI.Middlewares;
 using NLog.Web;
-
+using Stripe;
 
 namespace AdService.UI
 {
@@ -73,6 +73,9 @@ namespace AdService.UI
             app.UseStaticFiles();
 
             app.UseRouting();
+
+            StripeConfiguration.ApiKey = builder.Configuration.GetSection("Stripe:SecretKey").Get<string>();
+
             app.UseAuthentication();;
             app.UseAuthorization();
 

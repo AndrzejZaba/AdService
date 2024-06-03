@@ -74,9 +74,10 @@ namespace AdService.UI.Controllers
 
             TempData["Success"] = "New course advert has beed added!";
 
+            return RedirectToAction("Checkout", "Payment");
 
             // Dodanie ogłoszenia bez płatności
-            return RedirectToAction("UserCourseAdverts");
+            //return RedirectToAction("UserCourseAdverts");
         }
 
         [Route("courseadvert/{courseAdvertPageUrl}")]
