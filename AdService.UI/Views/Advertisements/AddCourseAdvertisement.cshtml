@@ -1,4 +1,5 @@
 ﻿@using AdService.Application.Advertisements.CourseAdvertisements.Queries.GetAddCourseAdvert;
+@using Newtonsoft.Json;
 
 
 @model AddCourseAdvertVm
@@ -129,10 +130,10 @@
                                 <!-- Form Group - Price -->
                                 <div class="mb-3">
                                     @Html.LabelFor(x => x.CourseAdvert.Price)
-                                    <div class=" input-group  col-md-3">
+                                    <div class=" input-group  col-md-2">
                                     <span class="input-group-text">$</span>
                                     @Html.TextBoxFor(x => x.CourseAdvert.Price, new { @id = "CalculatedPrice", @class = "form-control", @readonly = "readonly"})
-                                    <span class="input-group-text">.00</span>
+                                    
                                     </div>
                                     @Html.ValidationMessageFor(x => x.CourseAdvert.Price)
                                 </div>
@@ -164,67 +165,64 @@
     <partial name="Scripts/_EditorScripts" />
 
 
-    <script>
+  <script>
+    $(document).ready(function() {
+        var pricePerDay = @Html.Raw(JsonConvert.SerializeObject(Model.PricePerDay));
 
-        $(document).ready(function() {
+        var today = new Date();
+        today.setHours(0, 0, 0, 0); // Resets time to midnight
 
-            var today = new Date();
-            today.setHours(0, 0, 0, 0); // Resets time to midnight
+        init("#CourseAdvert_Description");
 
-            init("#CourseAdvert_Description");
+        $('.select2-CategoryId').select2({
+            theme: 'bootstrap-5'
+        });
 
-            $('.select2-CategoryId').select2({
-                theme: 'bootstrap-5'
-            });
+        $('#dtpStartDate').datetimepicker({
+            format: 'L',
+            useCurrent: true, // Automatically use today's date
+            minDate: today // Set minimum date to today
+        });
 
-            $('#dtpStartDate').datetimepicker({
-                format: 'L',
-                useCurrent: true, // Automatically use today's date
-                minDate: today // Set minimum date to today
-            })
-            
-            $('#dtpEndDate').datetimepicker({
-                format: 'L',
-                useCurrent: false, // Prevent auto-setting the current date
-                minDate: moment(today).add(1, 'days') // Tomorrow's date as the minimum
-            })
+        $('#dtpEndDate').datetimepicker({
+            format: 'L',
+            useCurrent: false, // Prevent auto-setting the current date
+            minDate: moment(today).add(1, 'days') // Tomorrow's date as the minimum
+        });
 
-            // Update EndDate minimum date whenever StartDate changes
-            $('#dtpStartDate').on('change.datetimepicker', function (e) {
-                var minDateForEnd = e.date.add(1, 'days'); // Set the minimum date for EndDate as one day after StartDate
-                $('#dtpEndDate').datetimepicker('minDate', minDateForEnd);
-                var currentEndDate = $('#dtpEndDate').datetimepicker('date');
-                if (currentEndDate && currentEndDate < minDateForEnd) {
-                    $('#dtpEndDate').datetimepicker('date', minDateForEnd);
-                }
-            });
+        // Update EndDate minimum date whenever StartDate changes
+        $('#dtpStartDate').on('change.datetimepicker', function (e) {
+            var minDateForEnd = e.date.add(1, 'days'); // Set the minimum date for EndDate as one day after StartDate
+            $('#dtpEndDate').datetimepicker('minDate', minDateForEnd);
+            var currentEndDate = $('#dtpEndDate').datetimepicker('date');
+            if (currentEndDate && currentEndDate < minDateForEnd) {
+                $('#dtpEndDate').datetimepicker('date', minDateForEnd);
+            }
+        });
 
-            var pricePerDay = 100; // Price per day
+        // Function to calculate days and update price
+        function updatePrice() {
+            var startDate = $('#dtpStartDate').datetimepicker('date');
+            var endDate = $('#dtpEndDate').datetimepicker('date');
+            var price = 0.0;
 
-                // Function to calculate days and update price
-            function updatePrice() {
-                var startDate = $('#dtpStartDate').datetimepicker('date');
-                var endDate = $('#dtpEndDate').datetimepicker('date');
-                var price = 0;
-
-                if (startDate && endDate && startDate <= endDate) {
-                    var diff = endDate.diff(startDate, 'days');
-                    price = diff * pricePerDay;
-                }
-
-                // Update the readonly text input for displaying calculated price
-                $('#CalculatedPrice').val(price);
+            if (startDate && endDate && startDate <= endDate) {
+                var diff = endDate.diff(startDate, 'days');
+                price = diff * pricePerDay;
             }
 
-            // Event listener for date changes
-            $('#dtpStartDate, #dtpEndDate').on('change.datetimepicker', function (e) {
-                updatePrice();
-            });
+            // Update the readonly text input for displaying calculated price
+            $('#CalculatedPrice').val(price.toFixed(2).toString().replace('.', ','));
+        }
 
+        // Event listener for date changes
+        $('#dtpStartDate, #dtpEndDate').on('change.datetimepicker', function (e) {
             updatePrice();
         });
 
-    </script>
+        updatePrice();
+    });
+</script>
 
 }
 

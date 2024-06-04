@@ -6,5 +6,6 @@ namespace AdService.Application.Advertisements.CourseAdvertisements.Queries.GetA
     {
         public AddCourseAdvertCommand CourseAdvert { get; set; }
         public List<CategoryDto> AvailableCategories { get; set; }
+        public decimal PricePerDay { get; set; }
     }
 }

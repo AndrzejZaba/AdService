@@ -12,6 +12,7 @@ public abstract class BaseController : Controller
     protected ISender Mediator => _mediatr ??= HttpContext.RequestServices.GetService<ISender>();
 
     protected string UserId => User.FindFirstValue(ClaimTypes.NameIdentifier);
+    protected string UserEmail => User.FindFirstValue(ClaimTypes.Email);
 
     protected async Task<MediatorValidateResponse<T>> MediatorSendValidate<T>
         (IRequest<T> request)

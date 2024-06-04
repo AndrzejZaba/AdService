@@ -77,7 +77,8 @@ namespace AdService.UI.Controllers
 
             return RedirectToAction("Checkout", "Payment", new { 
                 title = vm.CourseAdvert.Title, 
-                description = vm.CourseAdvert.Description.ExtractTextFromHtml().TakeFirstNChar(100)
+                description = vm.CourseAdvert.Description.ExtractTextFromHtml().TakeFirstNChar(100),
+                price = vm.CourseAdvert.Price
             });
 
             // Dodanie ogłoszenia bez płatności

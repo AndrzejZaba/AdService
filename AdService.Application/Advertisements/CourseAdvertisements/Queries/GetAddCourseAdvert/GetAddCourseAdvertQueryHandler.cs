@@ -32,6 +32,8 @@ public class GetAddCourseAdvertQueryHandler : IRequestHandler<GetAddCourseAdvert
             .Select(x => x.ToDto())
             .ToListAsync();
 
+        vm.PricePerDay = 0.5M;
+
         return vm;
     }
 }

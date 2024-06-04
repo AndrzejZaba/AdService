@@ -7,16 +7,6 @@ namespace AdService.UI.Controllers
     public class PaymentController : BaseController
     {
 
-        public IActionResult Index()
-        {
-            var product = new CourseAdvert
-            {
-                Title = "Advert to pay for"
-            };
-            
-            
-            return View();
-        }
         public IActionResult OrderConfirmation()
         {
             var service = new SessionService();
@@ -25,7 +15,7 @@ namespace AdService.UI.Controllers
             if (session.PaymentStatus.ToLower() == "paid")
                 return View("Success");
 
-            return View("Login");
+            return View("Error");
         }
 
         public IActionResult Success()
@@ -38,7 +28,7 @@ namespace AdService.UI.Controllers
             return View();
         }
 
-        public IActionResult CheckOut(string title, string description)
+        public IActionResult CheckOut(string title, string description, decimal price)
         {
             var domain = "https://localhost:7036/";
 
@@ -55,7 +45,7 @@ namespace AdService.UI.Controllers
                         PriceData = new SessionLineItemPriceDataOptions
                         {
                             Currency = "usd",
-                            UnitAmount = Convert.ToInt32(1) * 100,
+                            UnitAmountDecimal = price * 100,
                             ProductData = new SessionLineItemPriceDataProductDataOptions
                             {
                                 Name = title,
@@ -67,7 +57,7 @@ namespace AdService.UI.Controllers
 
                 },
                 Mode = "payment",
-                CustomerEmail = "andzab00@gmail.com",
+                CustomerEmail = UserEmail,
                 SuccessUrl = domain + $"Payment/OrderConfirmation",
                 CancelUrl = domain + $"Payment/Error"
             };
