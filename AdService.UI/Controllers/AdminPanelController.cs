@@ -1,12 +1,16 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using AdService.Application.Clients.Queries.GetClients;
+using AdService.Application.Dictionaries;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 
 namespace AdService.UI.Controllers
 {
+    [Authorize(Roles = $"{RolesDict.Administrator},{RolesDict.Worker}")]
     public class AdminPanelController : BaseController
     {
-        public IActionResult Users()
+        public async Task<IActionResult> Clients()
         {
-            return View();
+            return View(await Mediator.Send(new GetClientsBasicsQuery()));
         }
     }
 }

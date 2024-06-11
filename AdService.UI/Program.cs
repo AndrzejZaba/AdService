@@ -57,7 +57,9 @@ namespace AdService.UI
             }
 
             app.UseMiddleware<ExceptionHandlerMiddleware>();
-            app.UseMiddleware<ContentSecurityPolicyMiddleware>();
+            
+            // To be upgraded
+            //app.UseMiddleware<ContentSecurityPolicyMiddleware>();
 
             var logger = app.Services.GetService<ILogger<Program>>();
 

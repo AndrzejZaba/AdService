@@ -10,7 +10,7 @@
 {
         @if (User.IsInRole(RolesDict.Administrator))
         {
-            <a asp-controller="AdminPanel" asp-action="Users" class="nav-link text-white">Admin Panel</a>
+            <a asp-controller="AdminPanel" asp-action="Clients" class="nav-link text-white">Admin Panel</a>
         }
         @*<li class="nav-item">
         <a id="manage" class="nav-link text-white" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Hello @UserManager.GetUserName(User)!</a>

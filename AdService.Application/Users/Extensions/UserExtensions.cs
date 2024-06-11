@@ -1,6 +1,7 @@
 ﻿using AdService.Application.Advertisements.CourseAdvertisements.Queries.GetCourseAdvertPage;
 using AdService.Application.Clients.Commands.EditUser;
 using AdService.Application.Clients.Queries.GetClient;
+using AdService.Application.Clients.Queries.GetClients;
 using AdService.Domain.Entities;
 
 namespace AdService.Application.Users.Extensions;
@@ -29,7 +30,24 @@ public static class UserExtensions
     //        IsBusinessAccount = user.Client?.IsBusinessAccount ?? true
     //    };
     //}
-    
+
+    public static ClientBasicsDto ToClientBasicsDto(this ApplicationUser user)
+    {
+        if (user == null)
+            return null;
+
+        return new ClientBasicsDto
+        {
+            Id = user.Id,
+            Name = !string.IsNullOrWhiteSpace(user.FirstName) ||
+                   !string.IsNullOrWhiteSpace(user.LastName)
+                   ? $"{user.FirstName} {user.LastName}" : "-",
+            Email = user.Email,
+            //IsBusinessAccount = user.Client.IsBusinessAccount,
+            IsDeleted = user.IsDeleted
+        };
+    }
+
     public static EditUserCommand ToEditUserCommand(this ApplicationUser user)
     {
         if (user == null)

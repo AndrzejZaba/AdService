@@ -48,6 +48,7 @@ public static class DependencyInjection
         services.AddSingleton<IEmail, Email>();
         services.AddScoped<IDateTimeService, DateTimeService>();
         services.AddScoped<IFileImageNameService, FileImageNameService>();
+        services.AddScoped<IUserRoleManagerService, UserRoleManagerService>();
         services.AddSingleton<IFileImageManagerService, FileImageManagerService>();
 
         return services;

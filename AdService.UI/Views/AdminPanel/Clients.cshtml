@@ -1,0 +1,198 @@
+﻿@using AdService.Application.Clients.Queries.GetClients;
+
+@model IEnumerable<ClientBasicsDto>
+
+@{
+    Layout = $"/Views/Shared/_LayoutAdminPanel.cshtml";
+    ViewData["Title"] = "Clients list";
+}
+
+@section Styles{
+    <partial name="Styles/_DataTablesStyles" />
+}
+
+<partial name="Modals/_ModalConfirm" 
+        model="@(new ModalParams
+        {
+            Id = "modal-confirm-delete",
+            Title = "Confirm please",
+            Description = "Are you sure, you want to delete selected client?"
+})" />
+
+
+<div class="card card-primary card-border-top">
+
+    <div class="card-body">
+
+        <a href="/Client/AddClient" class="btn btn-primary mb-3 " role="button">
+            <i class="fas fa-solid fa-circle-plus"></i> Dodaj klienta.
+        </a>
+
+        <div class="form-group mt-0">
+            <div class="form-check form-check-inline form-switch mt-0">
+                <div class="custom-control custom-switch">
+                    <input type="checkbox" class="form-check-input" id="isActiveUserCb" onclick="refreshTable();" />
+                    <label class="form-check-label custom-control-label" for="isActiveUserCb">
+                        Only active
+                    </label>
+                </div>
+            </div>
+        </div>
+
+
+        <table id="clients" class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>Client's name</th>
+                    <th class="desktop">Email</th>
+                    <th class="desktop">Is deleted</th>
+                    <th class="desktop">Options</th>
+                </tr>
+            </thead>
+            <tbody>
+
+                @foreach(var client in Model)
+                {
+                    <tr>
+                        <td>
+                            <a class="edit-link" href="/Client/EditAdminClient?clientId=@client.Id">@client.Name</a>
+                        </td>
+                        
+                        <td>
+                            @client.Email
+                        </td>
+                        <td>
+                            @if (client.IsDeleted)
+                            {
+                                <span>Deleted</span>
+                            }
+                            else
+                            {
+                                <span>Active</span>
+                            }
+                        </td>
+                        <td>
+                            <a class="btn btn-success btn-sm" role="button" href="/Client/EditAdminClient?clientId=@client.Id">
+                                <i class="fas fa-solid fa-magnifying-glass"></i>Edytuj
+                            </a>
+
+                            @if (!client.IsDeleted)
+                            {
+                            <button class="btn btn-danger btn-sm" onclick="deleteClient('@client.Id', this)">
+                                <i class="fas fa-solid fa-trash-can"></i>Usuń
+                            </button>
+                            }
+
+                           
+
+                        </td>
+                    </tr>
+                }
+
+            </tbody>
+        </table>
+
+    </div>
+
+</div>
+
+@section Scripts {
+<partial name="Scripts/_DataTablesScripts" />
+
+    <script>
+
+        var selectedRow;
+        var selectedClientId = 0;
+        var clients;
+
+        $(document).ready(function () {
+
+            $('#isActiveUserCb').prop('checked', $.cookie("isActiveUserCb") === "1")
+
+            $('#isActiveUserCb').change(function(){
+                var cookiesIsActiveUserCbVal = this.checked === true ? "1" : "0";
+                $.cookie("isActiveUserCb", cookiesIsActiveUserCbVal, {path: '/Client', expires: 365});
+            });
+
+            clients = $('#clients').DataTable({
+                paging: true,
+                ordering: true,
+                info: true,
+                responsive: true,
+                autoWidth: false,
+                lengthChange: true,
+                language: {
+                    url: `/lib/datatables/lang/en.json`
+                },
+                order: [[0, "asc"]],
+                columnDefs: [
+                    {
+                        targets: [2],
+                        visible: false,
+                        searchable: true
+                    }]
+            });
+
+        });
+
+   $.fn.dataTable.ext.search.push(
+        function(settings, data, dataIndex, rowData, counter) {
+
+            var isActiveUserCb = $('#isActiveUserCb').is(":checked");
+
+            var activeUserCol = parseInt(data[2].slice(6, 7));
+
+            if (isActiveUserCb && activeUserCol == 1)
+                return false;
+
+            return true;
+        }
+    );
+
+        function refreshTable() {
+        clients.draw();
+    }
+
+        function deleteClient(id, btn){
+            selectedRow = btn.parentNode.parentNode;
+            selectedClientId = id;
+
+            $('#modal-confirm-delete').modal('show');
+
+        }
+
+        var errorMessage = 'Błąd. Nie udało się usunąć wybranego klienta. Spróbuj ponownie lub skontaktuj się z administratorem.'
+
+        $('#modal-confirm-delete-btn').on('click', function (e){
+            
+            $('#modal-confirm-delete').modal('hide');
+
+            $.ajax({
+                type: "POST",
+                url: "/User/DeleteUser",
+                data: {
+                    id: selectedClientId
+                },
+                success: function (data) {
+                    if (data.success){
+                        clients.rows(selectedRow).remove().draw();
+                        toastr.success('Dane zostały zaktualizowane.')
+                    } 
+                    else
+                        toastr.error(errorMessage);
+                    
+                },
+                error: function (data) {
+                        toastr.error(errorMessage);
+
+                }, 
+                dataType: "json"
+            });
+
+        });
+
+
+
+  
+    </script>
+}
