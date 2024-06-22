@@ -1,4 +1,5 @@
 ﻿using AdService.Application.Advertisements.CourseAdvertisements.Queries.GetCourseAdvertPage;
+using AdService.Application.Clients.Commands.EditAdminClient;
 using AdService.Application.Clients.Commands.EditUser;
 using AdService.Application.Clients.Queries.GetClient;
 using AdService.Application.Clients.Queries.GetClients;
@@ -68,6 +69,30 @@ public static class UserExtensions
             NipNumber = user.Client?.NipNumber,
             IsBusinessAccount = user.Client?.IsBusinessAccount ?? false,
             CompanyName = user.Client?.CompanyName
+        };
+    }
+
+    public static EditAdminClientCommand ToEditAdminClientCommand(this ApplicationUser user)
+    {
+        if (user == null)
+            return null;
+
+        return new EditAdminClientCommand
+        {
+            Id = user.Id,
+            City = user.Address?.City,
+            Country = user.Address?.Country,
+            Street = user.Address?.Street,
+            StreetNumber = user.Address?.StreetNumber,
+            ZipCode = user.Address?.ZipCode,
+            Email = user.Email,
+            FirstName = user.FirstName,
+            LastName = user.LastName,
+            PhoneNumber = user.PhoneNumber,
+            NipNumber = user.Client?.NipNumber,
+            IsBusinessAccount = user.Client?.IsBusinessAccount ?? false,
+            CompanyName = user.Client?.CompanyName
+
         };
     }
 

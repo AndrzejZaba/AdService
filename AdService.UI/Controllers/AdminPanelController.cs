@@ -12,5 +12,10 @@ namespace AdService.UI.Controllers
         {
             return View(await Mediator.Send(new GetClientsBasicsQuery()));
         }
+
+        public async Task<IActionResult> EditAdminClient()
+        {
+            return View(await Mediator.Send(new GetClientsBasicsQuery()));
+        }
     }
 }
