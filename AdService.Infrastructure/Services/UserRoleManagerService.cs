@@ -33,4 +33,22 @@ public class UserRoleManagerService : IUserRoleManagerService
     {
         return await _userManager.GetUsersInRoleAsync(roleName);
     }
+
+    public async Task RemoveFromRolesAsync(string userId, string roleName)
+    {
+        var user = await _userManager.FindByIdAsync(userId);
+        var result = await _userManager.RemoveFromRoleAsync(user, roleName);
+
+        if (!result.Succeeded)
+            throw new Exception(string.Join(". ", result.Errors.Select(x => x.Description)));
+    }
+
+    public async Task AddToRoleAsync(string userId, string roleName)
+    {
+        var user = await _userManager.FindByIdAsync(userId);
+        var result = await _userManager.AddToRoleAsync(user, roleName);
+
+        if (!result.Succeeded)
+            throw new Exception(string.Join(". ", result.Errors.Select(x => x.Description)));
+    }
 }

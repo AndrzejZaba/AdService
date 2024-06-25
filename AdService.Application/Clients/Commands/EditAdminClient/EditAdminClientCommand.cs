@@ -1,10 +1,11 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel;
 using Microsoft.AspNetCore.Http;
+using MediatR;
 
 namespace AdService.Application.Clients.Commands.EditAdminClient;
 
-public class EditAdminClientCommand
+public class EditAdminClientCommand : IRequest
 {
     public string Id { get; set; }
 

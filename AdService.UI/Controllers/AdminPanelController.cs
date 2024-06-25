@@ -18,5 +18,19 @@ namespace AdService.UI.Controllers
         {
             return View(await Mediator.Send(new GetEditAdminClientQuery { UserId = clientId }));
         }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> EditAdminClient(EditAdminClientVm vm)
+        {
+            var result = await MediatorSendValidate(vm.Client);
+
+            if (!result.IsValid)
+                return View(vm);
+
+            TempData["Success"] = "Dane o klientach zostały zaktualizowane.";
+
+            return RedirectToAction("Clients");
+        }
     }
 }

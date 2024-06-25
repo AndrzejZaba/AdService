@@ -7,5 +7,7 @@ namespace AdService.Application.Common.Interfaces
     {
         Task<IEnumerable<ApplicationUser>> GetUsersInRoleAsync(string roleName);
         Task<IEnumerable<IdentityRole>> GetRolesAsync(string userId);
+        Task RemoveFromRolesAsync(string userId, string name);
+        Task AddToRoleAsync(string userId, string name);
     }
 }
