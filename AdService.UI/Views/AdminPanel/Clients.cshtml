@@ -150,7 +150,7 @@
     );
 
         function refreshTable() {
-        clients.draw();
+            clients.draw();
     }
 
         function deleteClient(id, btn){
@@ -161,7 +161,7 @@
 
         }
 
-        var errorMessage = 'Błąd. Nie udało się usunąć wybranego klienta. Spróbuj ponownie lub skontaktuj się z administratorem.'
+        var errorMessage = 'Error. The selected client could not be deleted. Try again or contact your administrator.'
 
         $('#modal-confirm-delete-btn').on('click', function (e){
             
@@ -169,9 +169,9 @@
 
             $.ajax({
                 type: "POST",
-                url: "/User/DeleteUser",
+                url: "/AdminPanel/DeleteUser",
                 data: {
-                    id: selectedClientId
+                    userId: selectedClientId
                 },
                 success: function (data) {
                     if (data.success){
