@@ -9,15 +9,15 @@ namespace AdService.Application.Clients.Queries.GetEditAdminClient;
 public class GetEditAdminClientQueryHandler : IRequestHandler<GetEditAdminClientQuery, EditAdminClientVm>
 {
     private readonly IApplicationDbContext _context;
-   // private readonly IRoleManagerService _roleManagerService;
+    private readonly IRoleManagerService _roleManagerService;
     private readonly IUserRoleManagerService _userRoleManagerService;
     public GetEditAdminClientQueryHandler(
         IApplicationDbContext context,
-        //IRoleManagerService roleManagerService,
+        IRoleManagerService roleManagerService,
         IUserRoleManagerService userRoleManagerService)
     {
         _context = context;
-        //_roleManagerService = roleManagerService;
+        _roleManagerService = roleManagerService;
         _userRoleManagerService = userRoleManagerService;
     }
     public async Task<EditAdminClientVm> Handle(GetEditAdminClientQuery request, CancellationToken cancellationToken)
@@ -34,5 +34,9 @@ public class GetEditAdminClientQueryHandler : IRequestHandler<GetEditAdminClient
         vm.Client.RoleIds = (await _userRoleManagerService
             .GetRolesAsync(request.UserId))
             .Select(x => x.Id).ToList();
+
+        vm.AvailableRoles = _roleManagerService.GetRoles().ToList();
+
+        return vm;
     }
 }

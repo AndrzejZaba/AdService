@@ -1,5 +1,5 @@
 ﻿using AdService.Domain.Entities;
-
+using Microsoft.AspNetCore.Identity;
 
 namespace AdService.Application.Common.Interfaces
 {

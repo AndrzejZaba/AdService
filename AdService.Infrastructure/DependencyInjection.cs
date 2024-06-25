@@ -49,6 +49,7 @@ public static class DependencyInjection
         services.AddScoped<IDateTimeService, DateTimeService>();
         services.AddScoped<IFileImageNameService, FileImageNameService>();
         services.AddScoped<IUserRoleManagerService, UserRoleManagerService>();
+        services.AddScoped<IRoleManagerService, RoleManagerService>();
         services.AddSingleton<IFileImageManagerService, FileImageManagerService>();
 
         return services;

@@ -1,8 +1,10 @@
-﻿@using AdService.Application.Dictionaries;
+﻿@using AdService.Application.Clients.Queries.GetEditAdminClient;
+@using AdService.Application.Dictionaries;
 
 @model EditAdminClientVm
 
 @{
+    Layout = $"/Views/Shared/_LayoutAdminPanel.cshtml";
     ViewData["Title"] = "Edytowanie danych klienta";
 }
 
@@ -31,7 +33,22 @@
                 @Html.ValidationMessageFor(x => x.Client.Email)
             </div>
 
-            <div class="form-group">
+            <div class="row gx-3 mb-3 form-group">
+            <!-- Form Group (first name)-->
+                <div class="col-md-6 ">
+                    @Html.LabelFor(x => x.Client.FirstName)
+                    @Html.TextBoxFor(x => x.Client.FirstName, new { @class = "form-control", @placeholder = "Enter user's first name", @value = @Model.Client.FirstName})
+                    @Html.ValidationMessageFor(x => x.Client.FirstName)
+                </div>
+                <!-- Form Group (last name)-->
+                <div class="col-md-6 ">
+                    @Html.LabelFor(x => x.Client.LastName)
+                    @Html.TextBoxFor(x => x.Client.LastName, new { @class = "form-control", @placeholder = "Enter user's last name", @value = @Model.Client.LastName})
+                    @Html.ValidationMessageFor(x => x.Client.LastName)
+                </div>
+            </div>
+
+            @*<div class="form-group">
                 @Html.LabelFor(x => x.Client.FirstName)
                 @Html.TextBoxFor(x => x.Client.FirstName, new { @class = "form-control", placeholder="Wprowadź imię " })
                 @Html.ValidationMessageFor(x => x.Client.FirstName)
@@ -41,11 +58,11 @@
                 @Html.LabelFor(x => x.Client.LastName)
                 @Html.TextBoxFor(x => x.Client.LastName, new { @class = "form-control", placeholder="Wprowadź nazwisko " })
                 @Html.ValidationMessageFor(x => x.Client.LastName)
-            </div>
+            </div>*@
 
             <div class="form-check">
-                @Html.CheckBoxFor(x => x.Client.IsPrivateAccount, new{ @class = "form-check-input"})
-                @Html.LabelFor(x => x.Client.IsPrivateAccount, new{ @class = "form-check-label font-weight-bold"})
+                @Html.CheckBoxFor(x => x.Client.IsBusinessAccount, new{ @class = "form-check-input"})
+                @Html.LabelFor(x => x.Client.IsBusinessAccount, new{ @class = "form-check-label font-weight-bold"})
             </div>
 
             <div class="form-group" id="divNipNumber" style="display: none;">
@@ -126,7 +143,7 @@
 
             $('.select2-RoleIds').select2();
 
-            if ('@Model.Client.IsPrivateAccount.ToString().ToUpper()' == 'FALSE'){
+            if ('@Model.Client.IsBusinessAccount.ToString().ToUpper()' == 'TRUE'){
                 $("#divNipNumber").show();
             }
 
@@ -134,12 +151,12 @@
 
         });
 
-        $('#Client_IsPrivateAccount').click(function() {
-            if($('#Client_IsPrivateAccount').is(':checked')) {
-                $("#divNipNumber").hide();
+        $('#Client_IsBusinessAccount').click(function() {
+            if($('#Client_IsBusinessAccount').is(':checked')) {
+                $("#divNipNumber").show();
             }
             else{
-                $("#divNipNumber").show();
+                $("#divNipNumber").hide();
             }
         });
     </script>
