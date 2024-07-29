@@ -10,27 +10,30 @@
         </a>
     </li>
 
-    <li class="nav-item @Url.MakeActiveClass("Client", "Dashboard")">
+    @if (User.IsInRole(RolesDict.Administrator))
+    {
+        <li class="nav-item @Url.MakeActiveClass("AdminPanel", "Clients,EditAdminClient")">
 
-        <a asp-controller="Client" asp-action="Dashboard" class="nav-link align-middle px-0 text-white">
-            <i class="fas fa-solid fa-earth-americas"></i><span class="d-none d-sm-inline">
-                Pulpit</span>
-        </a>
-    </li>
+            <a asp-controller="AdminPanel" asp-action="Clients" class="nav-link align-middle px-0 text-white">
+                <i class="fas fa-solid fa-earth-americas"></i><span class="d-none d-sm-inline">
+                    Clients</span>
+            </a>
+        </li>
 
-    <li class="nav-item @Url.MakeActiveClass("Ticket", "Tickets,AddTicket")">
-        <a asp-controller="Ticket" asp-action="Tickets" class="nav-link align-middle px-0 text-white">
-            <i class="fas fa-solid fa-calendar-check"></i><span class="d-none d-sm-inline">
-                Karnety</span>
-        </a>
-    </li>
+        <li class="nav-item @Url.MakeActiveClass("AdminPanel", "Adverts")">
+            <a asp-controller="AdminPanel" asp-action="Advertisements" class="nav-link align-middle px-0 text-white">
+                <i class="fas fa-solid fa-calendar-check"></i><span class="d-none d-sm-inline">
+                    Adverts</span>
+            </a>
+        </li>
 
-    <li class="nav-item @Url.MakeActiveClass("Client", "Client,EditClient") mb-4">
-        <a asp-controller="Client" asp-action="Client" class="nav-link align-middle px-0 text-white">
-            <i class="fas fa-solid fa-user"></i><span class="d-none d-sm-inline">
-                Moje dane</span>
-        </a>
-    </li>
+        <li class="nav-item @Url.MakeActiveClass("AdminPanel", "Payments") mb-4">
+            <a asp-controller="AdminPanel" asp-action="Payments" class="nav-link align-middle px-0 text-white">
+                <i class="fas fa-solid fa-user"></i><span class="d-none d-sm-inline">
+                    Payments</span>
+            </a>
+        </li>
+    }
 
     @if (User.IsInRole(RolesDict.Administrator) || User.IsInRole(RolesDict.Worker) )
     {

@@ -55,7 +55,7 @@
                 {
                     <tr>
                         <td>
-                            <a class="edit-link" href="/Client/EditAdminClient?clientId=@client.Id">@client.Name</a>
+                            <a class="edit-link" href="/AdminPanel/EditAdminClient?clientId=@client.Id">@client.Name</a>
                         </td>
                         
                         <td>
@@ -97,21 +97,20 @@
 </div>
 
 @section Scripts {
-<partial name="Scripts/_DataTablesScripts" />
+    <partial name="Scripts/_DataTablesScripts" />
 
     <script>
-
         var selectedRow;
         var selectedClientId = 0;
         var clients;
 
         $(document).ready(function () {
-
-            $('#isActiveUserCb').prop('checked', $.cookie("isActiveUserCb") === "1")
+            $('#isActiveUserCb').prop('checked', $.cookie("isActiveUserCb") === "1");
 
             $('#isActiveUserCb').change(function(){
                 var cookiesIsActiveUserCbVal = this.checked === true ? "1" : "0";
                 $.cookie("isActiveUserCb", cookiesIsActiveUserCbVal, {path: '/Client', expires: 365});
+                refreshTable();
             });
 
             clients = $('#clients').DataTable({
@@ -132,67 +131,55 @@
                         searchable: true
                     }]
             });
-
         });
 
-   $.fn.dataTable.ext.search.push(
-        function(settings, data, dataIndex, rowData, counter) {
+        $.fn.dataTable.ext.search.push(
+            function(settings, data, dataIndex, rowData, counter) {
+                var isActiveUserCb = $('#isActiveUserCb').is(":checked");
+                var activeUserCol = data[2] === 'Deleted' ? 1 : 0;
 
-            var isActiveUserCb = $('#isActiveUserCb').is(":checked");
+                if (isActiveUserCb && activeUserCol == 1)
+                    return false;
 
-            var activeUserCol = parseInt(data[2].slice(6, 7));
-
-            if (isActiveUserCb && activeUserCol == 1)
-                return false;
-
-            return true;
-        }
-    );
+                return true;
+            }
+        );
 
         function refreshTable() {
             clients.draw();
-    }
+        }
 
-        function deleteClient(id, btn){
-            selectedRow = btn.parentNode.parentNode;
+        function deleteClient(id, btn) {
+            selectedRow = btn.closest('tr');
             selectedClientId = id;
 
             $('#modal-confirm-delete').modal('show');
-
         }
 
-        var errorMessage = 'Error. The selected client could not be deleted. Try again or contact your administrator.'
+        var errorMessage = 'Error. The selected client could not be deleted. Try again or contact your administrator.';
 
-        $('#modal-confirm-delete-btn').on('click', function (e){
-            
+        $('#modal-confirm-delete-btn').on('click', function (e) {
             $('#modal-confirm-delete').modal('hide');
 
             $.ajax({
                 type: "POST",
-                url: "/AdminPanel/DeleteUser",
+                url: "/AdminPanel/DeleteUser",  // Ensure this URL is correct
                 data: {
-                    userId: selectedClientId
+                    id: selectedClientId  // Ensure this parameter name matches what the server expects
                 },
                 success: function (data) {
-                    if (data.success){
-                        clients.rows(selectedRow).remove().draw();
-                        toastr.success('Dane zostały zaktualizowane.')
-                    } 
-                    else
+                    if (data.success) {
+                        clients.rows(selectedRow).remove().draw(false);  // Use .row and pass the node, .draw(false) to retain current paging
+                        toastr.success('Client deleted successfully.');
+                    } else {
                         toastr.error(errorMessage);
-                    
+                    }
                 },
                 error: function (data) {
-                        toastr.error(errorMessage);
-
-                }, 
+                    toastr.error(errorMessage);
+                },
                 dataType: "json"
             });
-
         });
-
-
-
-  
     </script>
 }

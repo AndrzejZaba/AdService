@@ -41,14 +41,14 @@ namespace AdService.UI.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> DeleteUser(string userId)
+        public async Task<IActionResult> DeleteUser(string id)
         {
             try
             {
                 await Mediator.Send(
                     new DeleteUserCommand
                     {
-                        Id = userId
+                        Id = id
                     });
                 return Json(new { success = true });
             }

@@ -3,10 +3,11 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - GYM Klub Fitness</title>
+    <title>@ViewData["Title"] - AdService</title>
     <link rel="stylesheet" href="~/lib/font-awesome/css/all.min.css" />
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="~/GymManager.UI.styles.css" asp-append-version="true" />
+    @*<link rel="stylesheet" href="~/css/custom_bootstrap.css" />*@
+    <link rel="stylesheet" href="~/AdService.UI.styles.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/lib/toastr.js/toastr.min.css" />
 
     @await RenderSectionAsync("Styles", required:false)
@@ -71,7 +72,7 @@
 
     <footer class="border-top bg-white footer">
         <div class="container text-dark my-2">
-            &copy; @DateTime.Now.Year - GymManager - <a asp-area="" asp-controller="Home" 
+            &copy; @DateTime.Now.Year - AddService - <a asp-area="" asp-controller="Home" 
             asp-action="Privacy" class="text-dark">Polityka Prywatności</a>
         </div>
     </footer>
