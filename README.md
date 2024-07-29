@@ -14,6 +14,7 @@ Main functionalities:
   payment system for advertisements
 
 Search view:
+
 ![image](https://github.com/user-attachments/assets/b20dcb54-4173-47c7-bdb3-68a7198e25f7)
 
 Searched adverts:
